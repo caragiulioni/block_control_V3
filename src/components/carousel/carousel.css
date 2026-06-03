@@ -1,0 +1,74 @@
+.carousel {
+	position: relative;
+	width: 23rem;
+	height: 23rem;
+	perspective: 500px;
+	transform-style: preserve-3d;
+	width: 50%;
+	margin: 40px auto;
+}
+
+.card-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transform: rotateY(calc(var(--offset) * 50deg))
+		scaleY(calc(1 + var(--abs-offset) * -0.4))
+		translateZ(calc(var(--abs-offset) * -30rem))
+		translateX(calc(var(--direction) * -5rem));
+	filter: blur(calc(var(--abs-offset) * 1rem));
+	transition: all 0.3s ease-out;
+	-webkit-user-select: none; /* Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+/Edge */
+	user-select: none; /* Standard */
+}
+
+.card {
+	width: 100%;
+	height: 100%;
+	padding: 2rem;
+	background-color: hsl(64, 100%, calc(50% + var(--abs-offset) * 50%));
+	border-radius: 0.3rem;
+	text-align: justify;
+	transition: all 0.3s ease-out;
+	border: 2px solid black;
+}
+
+.non-active {
+	opacity: 0.5;
+}
+.card h2 {
+	text-align: center;
+	font-size: 2rem;
+	font-weight: bold;
+	margin: 0 0 0.7em;
+}
+.card p,
+.card h2 {
+	transition: all 0.3s ease-out;
+	opacity: var(--active);
+}
+
+.nav {
+	font-size: 5rem;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 50%;
+	z-index: 2;
+	cursor: pointer;
+	user-select: none;
+	background: unset;
+	border: unset;
+}
+.nav.left {
+	transform: translateX(-100%) translatey(-50%);
+}
+
+.nav.right {
+	right: 0;
+	margin-right: -65px;
+	transform: translateX(100%) translatey(-50%);
+}

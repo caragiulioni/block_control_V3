@@ -1,0 +1,77 @@
+/* /**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/master/LICENSE
+ */
+
+/* adapted from 98.css to support cyber vs 98 theme on toggle and trimmed some of the bloat out not applicable to this project */
+
+[data-theme='light'] {
+  --main-bg: #193039;
+  --logo-outline-one: #04d9ff;
+  --logo-outline-two: #ff0000;
+  --text-color: black;
+  --main-bg:
+    linear-gradient(0deg, rgba(25, 48, 57, 0.7), rgba(25, 48, 57, 0.7)),
+    url('../images/hero.jpg');
+}
+
+[data-theme='dark'] {
+  --logo-outline-one: #00ffc3;
+  --logo-outline-two: #ff0033;
+  --text-color: white;
+  --main-bg:
+    linear-gradient(0deg, rgba(25, 48, 57, 0.7), rgba(25, 48, 57, 0.7)),
+    url('../images/hero.jpg');
+}
+
+body {
+  font-family: monospace, Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text-color);
+  min-height: 100%;
+  width: 100vw;
+  background: var(--main-bg);
+  background-size: cover;
+  background-attachment: fixed;
+  text-align: justify;
+  margin: 0;
+}
+
+/* div {
+  border-radius: 3px;
+} */
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin: 0;
+  font-weight: 400;
+}
+h1 {
+  font-size: 5.7rem;
+  font-family: 'Archivo', sans-serif;
+  font-style: italic;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+u {
+  text-decoration: none;
+  border-bottom: 0.5px solid #222222;
+}
