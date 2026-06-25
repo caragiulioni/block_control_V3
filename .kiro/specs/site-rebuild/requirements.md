@@ -157,6 +157,18 @@ Build reusable components from the design system, compose them into the "System 
 
 ---
 
+## SEO
+
+- Add to `index.html` when full site goes live (not needed for under construction page):
+  - Meta description (name + role + location)
+  - Open Graph tags (og:title, og:description, og:type, og:url, og:image)
+  - Twitter card meta (summary_large_image)
+  - OG image hosted on GCS (1200x630 branded graphic)
+- Semantic HTML throughout (headings, sections, landmarks, alt text) — already part of the build
+- No need for sitemap, structured data, or SSR — name-based search is uncontested
+
+---
+
 ## Build Order
 
 1. Shared components (Chip, TopBar, Footer, HUD, Panel)

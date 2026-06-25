@@ -1,0 +1,54 @@
+.reboot {
+  margin-top: 18px;
+}
+
+.lab {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  margin-bottom: 7px;
+}
+
+.lab b {
+  color: var(--neon);
+}
+
+.track {
+  height: 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.fill {
+  height: 100%;
+  width: 0;
+  transition: width 0.35s ease;
+  background: repeating-linear-gradient(135deg, var(--neon) 0 9px, #ff7a52 9px 18px);
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+.fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: translateX(-100%);
+  animation: shine 2.4s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  55%, 100% { transform: translateX(220%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill::after {
+    animation: none;
+  }
+}

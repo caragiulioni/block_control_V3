@@ -1,72 +1,83 @@
-/* /**
- * 98.css
- * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
- * https://github.com/jdan/98.css/blob/master/LICENSE
- */
+/* Block Control 2025 — Global Styles */
 
-/* adapted from 98.css to support cyber vs 98 theme on toggle and trimmed some of the bloat out not applicable to this project */
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Hanken+Grotesk:wght@400;500;600&display=swap');
 
-[data-theme='light'] {
-  --main-bg: #193039;
-  --logo-outline-one: #04d9ff;
-  --logo-outline-two: #ff0000;
-  --text-color: black;
+:root {
+  --void: #05090a;
+  --void-2: #070d0e;
+  --panel: rgba(10, 20, 21, 0.72);
+  --panel-solid: #0a1517;
+  --line: rgba(61, 242, 208, 0.22);
+  --line-soft: rgba(61, 242, 208, 0.12);
+  --cyan: #3df2d0;
+  --cyan-dim: #1f8d7c;
+  --green: #84e0a4;
+  --neon: #ff4f7a;
+  --neon-line: rgba(255, 79, 122, 0.6);
+  --neon-glow: rgba(255, 79, 122, 0.35);
+  --ink: #cfe7e3;
+  --ink-dim: #7fa39d;
+  --ink-faint: #4f6b67;
+  --mono: 'Space Mono', ui-monospace, monospace;
+  --body: 'Hanken Grotesk', system-ui, sans-serif;
+  --maxw: 1180px;
 }
 
-[data-theme='dark'] {
-  --main-bg: #193039;
-  --logo-outline-one: #00ffc3;
-  --logo-outline-two: #ff0033;
-  --text-color: white;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-  font-family: monospace, Arial, sans-serif;
-  font-size: 14px;
-  color: var(--text-color);
-  min-height: 100%;
-  width: 100vw;
-  background: var(--main-bg);
-  background-size: cover;
-  background-attachment: fixed;
-  text-align: justify;
   margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100svh;
 }
 
-/* div {
-  border-radius: 3px;
-} */
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
-  margin: 0;
-  font-weight: 400;
-}
-h1 {
-  font-size: 5.7rem;
-  font-family: 'Archivo', sans-serif;
-  font-style: italic;
+/* Subtle persistent texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 40%, rgba(61, 242, 208, 0.07), transparent 60%),
+    radial-gradient(80% 60% at 50% 50%, rgba(255, 79, 122, 0.05), transparent 60%),
+    linear-gradient(rgba(61, 242, 208, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 242, 208, 0.045) 1px, transparent 1px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
+  background-size: auto, auto, 46px 46px, 46px 46px, auto;
+  mask-image: radial-gradient(130% 100% at 50% 45%, #000, transparent 80%);
 }
 
-h2 {
-  font-size: 2.5rem;
-}
-
-h3 {
-  font-size: 2rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-}
-
-u {
+a {
+  color: var(--cyan);
   text-decoration: none;
-  border-bottom: 0.5px solid #222222;
+}
+
+::selection {
+  background: var(--cyan);
+  color: #04110e;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 400;
 }

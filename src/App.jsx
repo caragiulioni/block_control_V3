@@ -1,8 +1,7 @@
-import * as React from 'react';
-import Home from './pages/home.jsx';
+import SystemDown from './pages/SystemDown.jsx';
 
 function App() {
-  return <Home />;
+  return <SystemDown />;
 }
 
 export default App;

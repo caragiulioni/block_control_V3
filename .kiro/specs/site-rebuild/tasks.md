@@ -46,6 +46,7 @@
 
 - [ ] Build Links section (Panel collapsed, two-column link card grid)
 - [ ] Wire up Footer component in full site layout
+- [ ] Add SEO meta tags to index.html (description, OG, Twitter card)
 
 ## Phase 3: Music Player (separate spec)
 

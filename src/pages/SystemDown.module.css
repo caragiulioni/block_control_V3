@@ -1,0 +1,214 @@
+.screen {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dot {
+  color: var(--neon);
+}
+
+.offline {
+  color: var(--neon);
+}
+
+.stage {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 5vw, 52px) clamp(16px, 4vw, 40px);
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1.5fr 0.92fr;
+  max-width: 1080px;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (max-width: 880px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Alert panel */
+.panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  backdrop-filter: blur(7px);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.panel::before,
+.panel::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--neon);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.panel::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.pad {
+  position: relative;
+  padding: clamp(20px, 3.4vw, 30px);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cyan-dim);
+  margin: 0 0 14px;
+}
+
+.heading {
+  font-family: var(--mono);
+  font-weight: 700;
+  margin: 0;
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 9vw, 5rem);
+  color: #eafffb;
+  text-shadow: 0 0 26px rgba(255, 79, 122, 0.35);
+}
+
+.headingX {
+  color: var(--neon);
+  text-shadow: 0 0 28px var(--neon-glow);
+}
+
+.glitch {
+  animation: flick 5s steps(1) infinite;
+}
+
+@keyframes flick {
+  0%, 90%, 100% { opacity: 1; }
+  91% { opacity: 0.45; }
+  92% { opacity: 1; }
+  95% { opacity: 0.7; }
+  96% { opacity: 1; }
+}
+
+.sub {
+  font-family: var(--mono);
+  font-size: clamp(0.82rem, 2.2vw, 0.98rem);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin: 16px 0 0;
+  max-width: 52ch;
+}
+
+.sub b {
+  color: var(--neon);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 18px 0 0;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.retry {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  padding: 0.8em 1.5em;
+  border: 1px solid var(--neon);
+  border-radius: 4px;
+  background: rgba(255, 79, 122, 0.12);
+  color: var(--neon);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.retry:hover {
+  background: var(--neon);
+  color: #1a0509;
+  box-shadow: 0 0 20px var(--neon-glow);
+}
+
+.note {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch {
+    animation: none;
+  }
+}
+
+/* Network error block — system down page only */
+.netError {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.35);
+  font-family: var(--mono);
+  margin-top: 20px;
+}
+
+.netCode {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--neon);
+  font-weight: 700;
+}
+
+.netMsg {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+}
+
+.netDetail {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 880px) {
+  .netError {
+    margin-top: 14px;
+  }
+}
