@@ -25,3 +25,6 @@ dist-ssr
 
 # Reference assets (source material, not deployed)
 _references/
+
+# Kiro
+.kiro/
