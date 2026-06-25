@@ -12,7 +12,10 @@ const SystemDown = () => {
   const [trigger, setTrigger] = useState(0);
   const scrambleRef = useTextScramble('DOWN', trigger);
 
-  const handleRetry = () => setTrigger((t) => t + 1);
+  const handleRetry = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTrigger((t) => t + 1);
+  };
 
   return (
     <div className={styles.screen}>
