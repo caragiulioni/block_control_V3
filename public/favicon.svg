@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bcbars" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff4f7a"/>
+      <stop offset=".55" stop-color="#ff8a5a"/>
+      <stop offset="1" stop-color="#3df2d0"/>
+    </linearGradient>
+  </defs>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14" fill="#080f10" stroke="#3df2d0" stroke-opacity=".38" stroke-width="2"/>
+  <path d="M13 21 V13 H21" fill="none" stroke="#3df2d0" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M51 43 V51 H43" fill="none" stroke="#ff4f7a" stroke-width="2.6" stroke-linecap="round"/>
+  <g fill="url(#bcbars)">
+    <rect x="18" y="26" width="8" height="22" rx="2.5"/>
+    <rect x="30" y="18" width="8" height="30" rx="2.5"/>
+    <rect x="42" y="32" width="8" height="16" rx="2.5"/>
+  </g>
+  <rect x="16" y="49.5" width="36" height="2" rx="1" fill="#3df2d0" fill-opacity=".5"/>
+</svg>
