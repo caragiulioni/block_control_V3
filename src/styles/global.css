@@ -11,18 +11,13 @@
   --logo-outline-one: #04d9ff;
   --logo-outline-two: #ff0000;
   --text-color: black;
-  --main-bg:
-    linear-gradient(0deg, rgba(25, 48, 57, 0.7), rgba(25, 48, 57, 0.7)),
-    url('../images/hero.jpg');
 }
 
 [data-theme='dark'] {
+  --main-bg: #193039;
   --logo-outline-one: #00ffc3;
   --logo-outline-two: #ff0033;
   --text-color: white;
-  --main-bg:
-    linear-gradient(0deg, rgba(25, 48, 57, 0.7), rgba(25, 48, 57, 0.7)),
-    url('../images/hero.jpg');
 }
 
 body {
