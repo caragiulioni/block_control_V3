@@ -1,7 +1,7 @@
-import SystemDown from './pages/SystemDown.jsx';
+import Home from './pages/home.jsx';
 
 function App() {
-  return <SystemDown />;
+  return <Home />;
 }
 
 export default App;

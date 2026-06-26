@@ -1,10 +1,9 @@
-import * as React from 'react';
-import Player from '../components/audio-player/audio-player.jsx';
+import Hero from '../components/hero/Hero.jsx';
 
 const Home = () => {
   return (
     <>
-      <Player windowWidth={window.innerWidth} />
+      <Hero />
     </>
   );
 };
