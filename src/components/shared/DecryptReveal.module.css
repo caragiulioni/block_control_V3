@@ -1,0 +1,46 @@
+.reveal {
+  position: relative;
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+  margin-top: 1em;
+}
+
+.revealed {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--cyan) 22%, #eafffb 50%, var(--cyan) 78%, transparent);
+  box-shadow: 0 0 16px var(--cyan);
+  animation: decryptWipe 0.85s ease-out forwards;
+}
+
+@keyframes decryptWipe {
+  0% { top: 0; opacity: 0; }
+  12% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .scanline {
+    display: none;
+  }
+}

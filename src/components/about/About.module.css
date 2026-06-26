@@ -1,0 +1,54 @@
+.section {
+  position: relative;
+  margin-bottom: clamp(16px, 3vh, 26px);
+}
+
+/* Dossier layout: prose + HUD side by side */
+.dossier {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1.55fr 0.95fr;
+  align-items: start;
+  margin-top: 18px;
+}
+
+@media (max-width: 820px) {
+  .dossier {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Prose */
+.prose p {
+  margin: 0 0 1em;
+  max-width: 68ch;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+.lead {
+  color: #eafffb;
+  font-size: 1.05em;
+}
+
+/* Skills */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  position: relative;
+  z-index: 1;
+}
+
+.skillChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

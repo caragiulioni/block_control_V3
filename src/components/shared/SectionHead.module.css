@@ -1,0 +1,22 @@
+.head {
+  margin: 0 auto clamp(14px, 3vh, 26px);
+  max-width: var(--maxw);
+  padding: 0 clamp(16px, 4vw, 40px);
+}
+
+.head h2 {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
+  margin: 0.2em 0 0;
+  color: #eafffb;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cyan-dim);
+}

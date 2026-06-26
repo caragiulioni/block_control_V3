@@ -1,0 +1,45 @@
+.resolve {
+  position: relative;
+  filter: blur(9px);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: filter 0.75s ease, opacity 0.75s ease, transform 0.75s ease;
+}
+
+.resolved {
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--cyan) 22%, #eafffb 50%, var(--cyan) 78%, transparent);
+  box-shadow: 0 0 16px var(--cyan);
+  animation: wipe 0.85s ease-out forwards;
+}
+
+@keyframes wipe {
+  0% { top: 0; opacity: 0; }
+  12% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resolve {
+    filter: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scanline {
+    display: none;
+  }
+}
