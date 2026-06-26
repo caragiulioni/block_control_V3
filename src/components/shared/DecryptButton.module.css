@@ -49,3 +49,10 @@
     animation: none;
   }
 }
+
+@media (max-width: 600px) {
+  .btn {
+    font-size: 11px;
+    padding: 10px 14px;
+  }
+}

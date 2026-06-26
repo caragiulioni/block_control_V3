@@ -152,3 +152,15 @@
     animation: none;
   }
 }
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .titleAccent {
+    display: block;
+  }
+
+  .sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+}
