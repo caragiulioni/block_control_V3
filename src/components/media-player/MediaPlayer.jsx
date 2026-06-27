@@ -12,7 +12,7 @@ const loadFavorites = () => {
   } catch { return []; }
 };
 
-const MediaPlayer = () => {
+const MediaPlayer = ({ pauseRef }) => {
   const audioRef = useRef(null);
   const [currentTrackId, setCurrentTrackId] = useState(TRACKS[0].id);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -54,6 +54,18 @@ const MediaPlayer = () => {
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume;
   }, [volume]);
+
+  // Expose pause function for external callers (e.g., video play)
+  useEffect(() => {
+    if (pauseRef) {
+      pauseRef.current = () => {
+        if (audioRef.current && !audioRef.current.paused) {
+          audioRef.current.pause();
+          setIsPlaying(false);
+        }
+      };
+    }
+  });
 
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
@@ -203,17 +215,17 @@ const MediaPlayer = () => {
         </div>
 
         {/* Signal + Audio Bus */}
-        <div className={`${styles.signalPanel} ${isPlaying ? styles.signalActive : ''}`}>
+        <div aria-hidden='true' className={`${styles.signalPanel} ${isPlaying ? styles.signalActive : ''}`}>
           <div className={styles.meter}>
             <div className={styles.meterLab}>
               <span>SIGNAL</span>
-              <b>{isPlaying ? '100%' : 'OFF'}</b>
+              <b style={!isPlaying ? { color: 'var(--neon)' } : undefined}>{isPlaying ? '100%' : 'OFF'}</b>
             </div>
             <div className={styles.meterTrack}>
               <div className={styles.meterFill} />
             </div>
           </div>
-          <div className={styles.eqLabel}>AUDIO BUS // {isPlaying ? 'LIVE' : 'STANDBY'}</div>
+          <div className={styles.eqLabel}>AUDIO BUS // <span style={{ color: isPlaying ? 'var(--cyan)' : 'var(--neon)' }}>{isPlaying ? 'LIVE' : 'STANDBY'}</span></div>
           <div className={styles.eq}>
             {Array.from({ length: 15 }).map((_, i) => (
               <span
@@ -223,7 +235,7 @@ const MediaPlayer = () => {
                   '--anim': `eq${['A', 'B', 'C'][i % 3]}`,
                   '--d': `${(2.2 + Math.random() * 1.8).toFixed(2)}s`,
                   '--dl': `${(-Math.random() * 3.2).toFixed(2)}s`,
-                  '--s': (0.2 + Math.random() * 0.6).toFixed(2),
+                  '--s': (0.4 + Math.random() * 0.6).toFixed(2),
                 }}
               />
             ))}

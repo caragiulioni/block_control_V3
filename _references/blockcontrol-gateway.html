@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLOCKCONTROL // ACCESS</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmY0ZjdhIi8+PHN0b3Agb2Zmc2V0PSIuNTUiIHN0b3AtY29sb3I9IiNmZjhhNWEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMzZGYyZDAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxLjUiIHk9IjEuNSIgd2lkdGg9IjYxIiBoZWlnaHQ9IjYxIiByeD0iMTQiIGZpbGw9IiMwODBmMTAiIHN0cm9rZT0iIzNkZjJkMCIgc3Ryb2tlLW9wYWNpdHk9Ii4zOCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTEzIDIxVjEzSDIxIiBmaWxsPSJub25lIiBzdHJva2U9IiMzZGYyZDAiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNNTEgNDNWNTFINDMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmNGY3YSIgc3Ryb2tlLXdpZHRoPSIyLjYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxnIGZpbGw9InVybCgjYikiPjxyZWN0IHg9IjE4IiB5PSIyNiIgd2lkdGg9IjgiIGhlaWdodD0iMjIiIHJ4PSIyLjUiLz48cmVjdCB4PSIzMCIgeT0iMTgiIHdpZHRoPSI4IiBoZWlnaHQ9IjMwIiByeD0iMi41Ii8+PHJlY3QgeD0iNDIiIHk9IjMyIiB3aWR0aD0iOCIgaGVpZ2h0PSIxNiIgcng9IjIuNSIvPjwvZz48cmVjdCB4PSIxNiIgeT0iNDkuNSIgd2lkdGg9IjM2IiBoZWlnaHQ9IjIiIHJ4PSIxIiBmaWxsPSIjM2RmMmQwIiBmaWxsLW9wYWNpdHk9Ii41Ii8+PC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DEMO BACKDROP ONLY  —  this fake "site" exists so you can watch
+     the gateway dissolve away and reveal something underneath.
+     When integrating for real, DELETE everything in this block.
+     ============================================================ */
+  :root{
+    --void:#05090a;--cyan:#3df2d0;--mint:#9bffe4;--cyan-dim:#1f8d7c;
+    --neon:#ff4f7a;--neon-line:rgba(255,79,122,.6);--neon-glow:rgba(255,79,122,.35);
+    --ink:#cfe7e3;--ink-dim:#7fa39d;--ink-faint:#4f6b67;
+    --line:rgba(61,242,208,.22);--line-soft:rgba(61,242,208,.12);
+    --mono:'Space Mono',ui-monospace,monospace;--body:'Hanken Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--void);color:var(--ink);font-family:var(--body);min-height:100svh}
+  .demo-site{min-height:100svh;display:grid;place-items:center;text-align:center;padding:24px;
+    background:
+      radial-gradient(120% 80% at 50% 30%,rgba(61,242,208,.10),transparent 60%),
+      radial-gradient(80% 60% at 50% 80%,rgba(255,79,122,.06),transparent 60%),
+      linear-gradient(rgba(61,242,208,.05) 1px,transparent 1px) 0 0/52px 52px,
+      linear-gradient(90deg,rgba(61,242,208,.05) 1px,transparent 1px) 0 0/52px 52px,
+      var(--void)}
+  .demo-site h1{font-family:var(--mono);font-weight:700;font-size:clamp(2rem,8vw,4rem);
+    color:#eafffb;text-shadow:0 0 30px rgba(61,242,208,.4);margin:0}
+  .demo-site h1 .x{color:var(--cyan)}
+  .demo-site p{font-family:var(--mono);color:var(--ink-dim);letter-spacing:.2em;margin-top:14px;font-size:13px}
+  /* ===================== END DEMO BACKDROP ===================== */
+
+
+  /* ============================================================
+     GATEWAY OVERLAY  —  THIS is the portable piece.
+     Copy: this <style> block (the .gate* rules), the markup with
+     id="gate", and the <script> at the bottom, into your real site.
+     ============================================================ */
+  .gate{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+    padding:clamp(16px,4vw,40px);
+    background:
+      radial-gradient(120% 90% at 50% 38%,rgba(61,242,208,.08),transparent 60%),
+      radial-gradient(80% 60% at 50% 80%,rgba(255,79,122,.05),transparent 60%),
+      linear-gradient(rgba(61,242,208,.045) 1px,transparent 1px) 0 0/46px 46px,
+      linear-gradient(90deg,rgba(61,242,208,.045) 1px,transparent 1px) 0 0/46px 46px,
+      #05090aF2;
+    backdrop-filter:blur(2px);overflow:hidden}
+  /* drifting scanlines over the whole gate */
+  .gate::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 2px,transparent 2px 4px)}
+
+  .gate__card{position:relative;width:min(680px,100%);
+    background:linear-gradient(180deg,rgba(10,21,23,.86),rgba(7,14,15,.92));
+    border:1px solid var(--line);border-radius:8px;padding:clamp(20px,4vw,30px);
+    box-shadow:0 0 0 1px rgba(0,0,0,.5),0 30px 80px rgba(0,0,0,.6)}
+  /* corner brackets */
+  .gate__card::before,.gate__card::after{content:"";position:absolute;width:18px;height:18px;
+    border:2px solid var(--cyan);pointer-events:none}
+  .gate__card::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .gate__card::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+  .gate__eye{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--cyan-dim);margin:0 0 14px}
+  .gate__chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .gchip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:.36em .72em;border-radius:3px;
+    border:1px solid var(--line);color:var(--cyan);background:rgba(0,0,0,.35);white-space:nowrap;line-height:1;
+    box-shadow:0 0 12px rgba(61,242,208,.12) inset}
+
+  .gate__term{font-family:var(--mono);font-size:clamp(12px,2.6vw,14px);line-height:1.75;
+    background:rgba(0,0,0,.42);border:1px solid var(--line-soft);border-radius:5px;
+    padding:14px 16px;min-height:212px;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+  .gate__term .ok{color:var(--cyan)}
+  .gate__term .bad{color:var(--neon)}
+  .gate__term .dim{color:var(--ink-faint)}
+  .gate__cursor{display:inline-block;width:8px;height:15px;background:var(--cyan);vertical-align:-2px;
+    margin-left:3px;box-shadow:0 0 8px var(--cyan);animation:gblink 1.1s steps(1) infinite}
+  @keyframes gblink{50%{opacity:.12}}
+
+  /* progress bar — cyan-green w/ lighter-mint barber-pole stripes */
+  .gate__bar{margin-top:18px}
+  .gate__bar .lab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;
+    letter-spacing:.1em;color:var(--ink-dim);margin-bottom:7px}
+  .gate__bar .lab b{color:var(--cyan)}
+  .gate__bar .track{height:12px;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+    background:rgba(0,0,0,.5);position:relative}
+  .gate__bar .fill{height:100%;width:0;transition:width .25s ease;
+    background:repeating-linear-gradient(135deg,var(--cyan) 0 10px,var(--mint) 10px 20px);
+    box-shadow:0 0 14px rgba(61,242,208,.5)}
+  .gate__bar .fill::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+    transform:translateX(-100%);animation:gshine 2.2s ease-in-out infinite}
+  @keyframes gshine{0%{transform:translateX(-100%)}55%,100%{transform:translateX(220%)}}
+
+  /* prompt + Y/N */
+  .gate__prompt{font-family:var(--mono);font-size:clamp(13px,2.8vw,15px);letter-spacing:.04em;
+    color:var(--ink);margin:22px 0 14px;opacity:0;transition:opacity .4s ease}
+  .gate__prompt .q{color:var(--cyan)}
+  .gate.ready .gate__prompt{opacity:1}
+  .gate__btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;opacity:.35;pointer-events:none;
+    transition:opacity .4s ease}
+  .gate.ready .gate__btns{opacity:1;pointer-events:auto}
+  .gbtn{font-family:var(--mono);font-weight:700;font-size:15px;letter-spacing:.1em;
+    padding:1em 1.2em;border-radius:5px;cursor:pointer;background:rgba(0,0,0,.3);transition:.18s;
+    display:flex;align-items:center;justify-content:center;gap:.6em}
+  .gbtn small{font-weight:400;font-size:11px;letter-spacing:.14em;opacity:.7}
+  .gbtn--y{border:1px solid var(--cyan);color:var(--cyan);box-shadow:0 0 16px rgba(61,242,208,.12) inset}
+  .gbtn--y:hover{background:var(--cyan);color:#04110e;box-shadow:0 0 26px rgba(61,242,208,.45)}
+  .gbtn--n{border:1px solid var(--neon-line);color:var(--neon);box-shadow:0 0 16px rgba(255,79,122,.1) inset}
+  .gbtn--n:hover{background:var(--neon);color:#1a0509;box-shadow:0 0 26px var(--neon-glow)}
+
+  /* DENIED state (after N) */
+  .gate.denied .gate__card{animation:gjitter .4s steps(2) 2}
+  .gate.denied .gate__card::before,.gate.denied .gate__card::after{border-color:var(--neon)}
+
+  /* exit: scan sweep + glitch jitter + dissolve (after Y) */
+  .gate__sweep{position:absolute;left:0;right:0;top:0;height:3px;z-index:5;pointer-events:none;opacity:0;
+    background:linear-gradient(90deg,transparent,var(--cyan) 22%,#eafffb 50%,var(--cyan) 78%,transparent);
+    box-shadow:0 0 22px var(--cyan)}
+  .gate.go .gate__sweep{animation:gsweep .55s ease-out forwards}
+  @keyframes gsweep{0%{top:0;opacity:0}10%{opacity:1}100%{top:100%;opacity:0}}
+  .gate.go .gate__card{animation:gjitter .12s steps(2) 4}
+  .gate.go{animation:gdissolve .9s .25s ease forwards}
+  @keyframes gdissolve{to{opacity:0;filter:blur(8px) brightness(1.5);transform:scale(1.015)}}
+  @keyframes gjitter{
+    0%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}
+    50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,-1px)}100%{transform:translate(0,0)}}
+
+  @media (prefers-reduced-motion:reduce){
+    .gate__cursor,.gate__bar .fill::after,.gate.denied .gate__card,
+    .gate.go .gate__card,.gate.go .gate__sweep{animation:none}
+    .gate.go{animation:gfade .4s forwards}
+    @keyframes gfade{to{opacity:0}}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== DEMO BACKDROP (delete on real integration) ===== -->
+<div class="demo-site">
+  <div>
+    <h1>BLOCK<span class="x">CONTROL</span></h1>
+    <p>// THE SITE LIVES HERE — REVEALED ONCE YOU'RE IN</p>
+  </div>
+</div>
+
+<!-- ===== GATEWAY OVERLAY (portable) ===== -->
+<div class="gate" id="gate" role="dialog" aria-label="Access gateway" aria-modal="true">
+  <div class="gate__sweep"></div>
+  <div class="gate__card">
+    <p class="gate__eye">SECURE NODE // HANDSHAKE</p>
+    <div class="gate__chips">
+      <span class="gchip">ONLINE</span>
+      <span class="gchip">HANDSHAKE OK</span>
+      <span class="gchip">ENCRYPTED</span>
+    </div>
+    <div class="gate__term" id="gterm" aria-live="polite"></div>
+    <div class="gate__bar">
+      <div class="lab"><span id="gmsg">NEGOTIATING…</span><b id="gpct">000%</b></div>
+      <div class="track"><div class="fill" id="gfill"></div></div>
+    </div>
+    <p class="gate__prompt" id="gprompt"><span class="q">&gt;</span> grant access to BLOCKCONTROL? [Y/N]</p>
+    <div class="gate__btns" id="gbtns">
+      <button class="gbtn gbtn--y" id="gyes" type="button">Y <small>ENTER</small></button>
+      <button class="gbtn gbtn--n" id="gno" type="button">N <small>DENY</small></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var gate=document.getElementById('gate'),term=document.getElementById('gterm'),
+      fill=document.getElementById('gfill'),pct=document.getElementById('gpct'),
+      msg=document.getElementById('gmsg'),btns=document.getElementById('gbtns'),
+      yes=document.getElementById('gyes'),no=document.getElementById('gno');
+
+  var READY=[
+    [{x:'> NODE MTL // carrier ......... '},{x:'LINKED',c:'ok'}],
+    [{x:'> core.services ............... '},{x:'ONLINE',c:'ok'}],
+    [{x:'> auto-reboot ................. '},{x:'OK',c:'ok'}],
+    [{x:'> backup node ................. '},{x:'ROUTED',c:'ok'}],
+    [{x:'> integrity check ............. '},{x:'PASS',c:'ok'}],
+    [{x:'> decryption key .............. '},{x:'ACCEPTED',c:'ok'}]
+  ];
+  var DENIED=[
+    [{x:'> reauthenticating ............ '},{x:'DENIED',c:'bad'}],
+    [{x:'> key rejected ................ '},{x:'0x1A',c:'bad'}],
+    [{x:'> lockout timer ............... '},{x:'CLEARED',c:'dim'}]
+  ];
+
+  var tmr=null;
+  function typeLog(lines,after){
+    if(tmr)clearTimeout(tmr);
+    term.innerHTML='';
+    if(reduce){
+      lines.forEach(function(ln){var d=document.createElement('div');
+        ln.forEach(function(s){var sp=document.createElement('span');if(s.c)sp.className=s.c;sp.textContent=s.x;d.appendChild(sp);});
+        term.appendChild(d);});
+      cursor(); if(after)after(); return;
+    }
+    var li=0,si=0,ci=0,curLine=null,curSpan=null;
+    (function step(){
+      if(li>=lines.length){cursor(); if(after)after(); tmr=null; return;}
+      var ln=lines[li];
+      if(si===0&&ci===0){curLine=document.createElement('div');term.appendChild(curLine);}
+      var seg=ln[si];
+      if(ci===0){curSpan=document.createElement('span');if(seg.c)curSpan.className=seg.c;curLine.appendChild(curSpan);}
+      curSpan.textContent+=seg.x.charAt(ci);ci++;
+      if(ci>=seg.x.length){si++;ci=0;if(si>=ln.length){li++;si=0;tmr=setTimeout(step,150);return;}}
+      tmr=setTimeout(step,seg.x.length>20?7:20);
+    })();
+  }
+  function cursor(){var c=document.createElement('span');c.className='gate__cursor';term.appendChild(c);}
+
+  var rb=null;
+  function runBar(target,onDone){
+    if(rb)clearTimeout(rb);
+    if(reduce){fill.style.width=target+'%';pct.textContent=String(target).padStart(3,'0')+'%';
+      msg.textContent='HANDSHAKE COMPLETE // ACCESS READY'; if(onDone)onDone(); return;}
+    var p=0;
+    (function tick(){
+      if(p<target){p+=Math.max(1,Math.round((target-p)*0.14));if(p>target)p=target;
+        fill.style.width=p+'%';pct.textContent=String(p).padStart(3,'0')+'%';
+        msg.textContent=p<40?'NEGOTIATING…':p<80?'EXCHANGING KEYS…':'FINALIZING…';
+        rb=setTimeout(tick,90);
+      }else{msg.textContent='HANDSHAKE COMPLETE // ACCESS READY';if(onDone)onDone();}
+    })();
+  }
+
+  function boot(){
+    gate.classList.remove('ready','denied');
+    typeLog(READY);
+    runBar(100,function(){ gate.classList.add('ready'); });
+  }
+
+  // Y → dissolve + reveal, then remove overlay entirely
+  function enter(){
+    gate.classList.remove('ready');
+    gate.classList.add('go');
+    var done=false, kill=function(){ if(done)return; done=true; gate.remove(); };
+    gate.addEventListener('animationend',function(e){ if(e.animationName==='gdissolve'||e.animationName==='gfade') kill(); });
+    setTimeout(kill,1600); // safety net
+  }
+
+  // N → epic denial, then "run it back" to ready
+  function deny(){
+    gate.classList.remove('ready');
+    gate.classList.add('denied');
+    fill.style.width='0%';pct.textContent='000%';msg.textContent='ACCESS DENIED';
+    typeLog(DENIED, function(){
+      setTimeout(function(){
+        gate.classList.remove('denied');
+        boot(); // run it back — re-handshake to ready
+      }, 1100);
+    });
+  }
+
+  yes.addEventListener('click',enter);
+  no.addEventListener('click',deny);
+  // keyboard: Y / N / Enter
+  document.addEventListener('keydown',function(e){
+    if(!document.body.contains(gate)) return;
+    if(!gate.classList.contains('ready')) return;
+    var k=e.key.toLowerCase();
+    if(k==='y'||k==='enter')enter();
+    else if(k==='n')deny();
+  });
+
+  window.addEventListener('load',boot);
+})();
+</script>
+</body>
+</html>

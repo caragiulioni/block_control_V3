@@ -104,8 +104,6 @@ const Demos = () => {
           id="01·A"
           title="BUILDS"
           statusLabel={`0${DEMOS.length} ARTIFACTS`}
-          collapsible
-          defaultOpen={false}
         >
           <Carousel slidesPerView={slidesPerView} loop dots={false}>
             {DEMOS.map((demo) => (

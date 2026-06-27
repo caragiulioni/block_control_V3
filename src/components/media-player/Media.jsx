@@ -8,7 +8,7 @@ import { useTextScramble } from '../../hooks/useTextScramble.js';
 
 const TOTAL_TRACKS = TRACKS.length;
 
-const Media = () => {
+const Media = ({ pauseRef }) => {
   const [visible, setVisible] = useState(false);
   const headingRef = useTextScramble('MEDIA', visible);
 
@@ -27,7 +27,7 @@ const Media = () => {
           collapsible
           defaultOpen={true}
         >
-          <MediaPlayer />
+          <MediaPlayer pauseRef={pauseRef} />
         </Panel>
       </ScrollReveal>
     </section>
