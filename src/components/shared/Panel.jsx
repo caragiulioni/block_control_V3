@@ -66,9 +66,12 @@ const Panel = ({
         </div>
       )}
 
-      <div className={`${styles.body} ${isOpen ? styles.bodyOpen : ''}`}>
-        <div className={styles.content}>
-          {children}
+      <div
+        className={`${styles.body} ${isOpen ? styles.bodyOpen : ''}`}
+        aria-hidden={!isOpen}
+      >
+        <div className={styles.content} tabIndex={isOpen ? undefined : -1}>
+          {isOpen && children}
         </div>
       </div>
     </div>

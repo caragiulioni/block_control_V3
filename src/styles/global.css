@@ -81,3 +81,9 @@ p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 400;
 }
+
+/* Global focus-visible for all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
