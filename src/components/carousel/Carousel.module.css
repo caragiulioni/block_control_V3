@@ -1,0 +1,93 @@
+.carousel {
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+.carousel:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.slide {
+  min-width: 0;
+  padding: 0 7px;
+}
+
+.slide:first-child {
+  padding-left: 0;
+}
+
+.slide:last-child {
+  padding-right: 0;
+}
+
+/* Nav buttons */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.navBtn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  background: rgba(4, 9, 10, 0.6);
+  color: var(--cyan);
+  cursor: pointer;
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, color 0.2s;
+  border-radius: 4px;
+}
+
+.navBtn:hover {
+  background: var(--cyan);
+  color: #04110e;
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--cyan);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.dotActive {
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    transition: none;
+  }
+}

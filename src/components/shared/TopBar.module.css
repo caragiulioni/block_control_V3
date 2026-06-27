@@ -11,6 +11,10 @@
   border-bottom: 1px solid var(--line-soft);
 }
 
+.topbar > span:last-child {
+  text-align: right;
+}
+
 .topbar b {
   color: var(--cyan);
   letter-spacing: 0.34em;
@@ -18,4 +22,10 @@
 
 .clock {
   color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .clock {
+    display: block;
+  }
 }

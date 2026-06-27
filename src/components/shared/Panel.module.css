@@ -63,6 +63,7 @@
   background: linear-gradient(180deg, rgba(10, 20, 21, 0.4) 0%, rgba(10, 20, 21, 0.7) 100%);
 }
 
+/* Header — acts as button when collapsible */
 .header {
   display: flex;
   align-items: center;
@@ -72,6 +73,24 @@
   font-family: var(--mono);
   position: relative;
   z-index: 1;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: default;
+}
+
+.panel:has(.toggle) .header {
+  cursor: pointer;
+}
+
+.header:hover .title {
+  color: #fff;
+}
+
+.header:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--cyan), 0 0 16px rgba(61, 242, 208, 0.2);
 }
 
 .id {
@@ -87,15 +106,64 @@
   color: var(--cyan);
   font-weight: 700;
   flex: 1 1 auto;
+  transition: color 0.2s;
 }
 
 .status {
   flex: 0 0 auto;
 }
 
+/* Toggle button */
+.toggle {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--cyan);
+  font-size: 18px;
+  transition: transform 0.25s, background 0.2s;
+}
+
+.toggleOpen {
+  transform: rotate(45deg);
+  background: rgba(61, 242, 208, 0.12);
+}
+
+/* Collapsible body — CSS grid rows for smooth animation */
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.bodyOpen {
+  grid-template-rows: 1fr;
+}
+
 .content {
   position: relative;
   z-index: 1;
-  padding: 0 clamp(16px, 3vw, 26px) clamp(20px, 3vw, 26px);
+  padding: 18px clamp(16px, 3vw, 26px) clamp(20px, 3vw, 26px);
   border-top: 1px solid var(--line-soft);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.body:not(.bodyOpen) .content {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .body {
+    transition: none;
+  }
+
+  .toggle {
+    transition: none;
+  }
 }

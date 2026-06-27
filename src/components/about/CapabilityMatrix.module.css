@@ -1,0 +1,138 @@
+.matrix {
+  position: relative;
+  margin-top: 26px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(8, 18, 19, 0.94), rgba(6, 12, 13, 0.96));
+}
+
+/* Corner brackets */
+.matrix::before,
+.matrix::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--cyan);
+  pointer-events: none;
+  opacity: 0.7;
+  z-index: 2;
+}
+
+.matrix::before {
+  top: -1px;
+  left: -1px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.matrix::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Scan animation */
+.scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px;
+  top: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(61, 242, 208, 0.12), transparent);
+  animation: capscan 5.5s linear infinite;
+}
+
+@keyframes capscan {
+  0% { transform: translateY(-70px); }
+  100% { transform: translateY(460px); }
+}
+
+/* Header bar */
+.bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.barId {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--cyan-dim);
+}
+
+.barTitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  font-weight: 700;
+  flex: 1;
+}
+
+/* Content */
+.pad {
+  position: relative;
+  z-index: 2;
+  padding: 16px clamp(14px, 2.4vw, 20px) 18px;
+}
+
+.group {
+  margin-bottom: 15px;
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--cyan-dim);
+  margin-bottom: 10px;
+}
+
+.label::before {
+  content: '▸';
+  color: var(--cyan);
+}
+
+.label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--line-soft) 0 4px, transparent 4px 8px);
+}
+
+.labelAlt {
+  color: var(--neon);
+}
+
+.labelAlt::before {
+  color: var(--neon);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan {
+    animation: none;
+    display: none;
+  }
+}

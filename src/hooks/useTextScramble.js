@@ -22,7 +22,7 @@ export function useTextScramble(finalText, trigger) {
     }
 
     const len = finalText.length;
-    const dur = 620;
+    const dur = 1200;
     const t0 = performance.now();
 
     function frame(now) {

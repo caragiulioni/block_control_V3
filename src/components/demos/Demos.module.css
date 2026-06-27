@@ -1,0 +1,104 @@
+.section {
+  position: relative;
+  margin-bottom: clamp(16px, 3vh, 26px);
+}
+
+/* Demo card */
+.card {
+  position: relative;
+  border: 1px solid var(--line-soft);
+  border-radius: 5px;
+  overflow: hidden;
+  background: #0a1314;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s, transform 0.25s;
+  height: 100%;
+}
+
+.card:hover {
+  border-color: var(--line);
+  transform: translateY(-3px);
+}
+
+.cardImage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(135deg, #102022, #08110f);
+  background-size: cover;
+  background-position: center;
+}
+
+.cardImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(6, 12, 12, 0.62), rgba(6, 12, 12, 0.86)),
+    radial-gradient(120% 120% at 30% 0%, rgba(61, 242, 208, 0.16), transparent 55%);
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+
+.card:hover .cardImage::after {
+  opacity: 0.5;
+}
+
+.cardNo {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--cyan);
+  opacity: 0.85;
+}
+
+.cardBody {
+  padding: 13px 14px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  color: #eafffb;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.cardChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.cardLinks {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .cardImage::after {
+    transition: none;
+  }
+}

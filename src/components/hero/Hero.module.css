@@ -64,7 +64,8 @@
   font-size: 11px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--cyan-dim);
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(61, 242, 208, 0.3);
 }
 
 .title {
@@ -106,28 +107,34 @@
 .scrollCue {
   margin-top: clamp(28px, 6vh, 64px);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.3em;
-  color: var(--ink-dim);
+  color: var(--cyan);
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  text-shadow: 0 0 12px rgba(61, 242, 208, 0.4);
 }
 
 .scrollCue::before {
   content: "";
-  width: 34px;
+  width: 44px;
   height: 1px;
-  background: var(--cyan);
-  box-shadow: 0 0 8px var(--cyan);
+  background: linear-gradient(90deg, transparent, var(--cyan));
+  box-shadow: 0 0 10px var(--cyan);
 }
 
 .blink {
-  animation: blink 1.4s steps(1) infinite;
+  display: inline-block;
+  animation: bounce 1.6s ease-in-out infinite;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan);
+  font-size: 18px;
 }
 
-@keyframes blink {
-  50% { opacity: 0.15; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(5px); opacity: 0.4; }
 }
 
 /* Reveal animation */
@@ -150,6 +157,7 @@
 
   .blink {
     animation: none;
+    transform: none;
   }
 }
 
@@ -163,4 +171,9 @@
     font-size: 0.75rem;
     letter-spacing: 0.08em;
   }
+
+  .topBarSub {
+    display: block;
+  }
 }
+

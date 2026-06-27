@@ -27,4 +27,5 @@
 .green {
   color: var(--green);
   border-color: rgba(132, 224, 164, 0.45);
+  box-shadow: 0 0 12px rgba(132, 224, 164, 0.16) inset, 0 0 14px rgba(132, 224, 164, 0.12);
 }

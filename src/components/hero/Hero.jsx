@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import TopBar from '../shared/TopBar.jsx';
 import Chip from '../shared/Chip.jsx';
+import { useTextScramble } from '../../hooks/useTextScramble.js';
 import styles from './Hero.module.css';
 import ewaste from '../../images/ewaste.jpg';
 
@@ -9,6 +10,7 @@ const REVEAL_COUNT = 5;
 
 const Hero = () => {
   const [revealed, setRevealed] = useState(-1);
+  const eyebrowRef = useTextScramble('SYS // recovered media index', revealed >= 0);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -39,12 +41,12 @@ const Hero = () => {
       <div className={styles.grid} />
 
       <TopBar
-        left={<><b>BLOCKCONTROL</b> <span style={{ color: 'var(--neon)' }}>//</span> NODE_MTL</>}
+        left={<><b>BLOCKCONTROL</b> <span className={styles.topBarSub}>NODE_MTL <span style={{ color: 'var(--neon)' }}>//</span> <span style={{ color: 'var(--cyan)' }}>ONLINE</span></span></>}
         right="TOD TC"
       />
 
       <div className={styles.core}>
-        <p className={`${styles.eyebrow} ${r(0)}`}>
+        <p className={`${styles.eyebrow} ${r(0)}`} ref={eyebrowRef}>
           SYS // recovered media index
         </p>
 
@@ -54,13 +56,13 @@ const Hero = () => {
 
         <p className={`${styles.sub} ${r(2)}`}>
           Online record for <b>Cara Giulioni</b><br />
-          <span style={{ color: 'var(--green)' }}>&gt;</span> software for web / development<br />
+          <span style={{ color: 'var(--green)' }}>&gt;</span> software for web // development<br />
           <span style={{ color: 'var(--green)' }}>&gt;</span> visual &amp; auditory arts
         </p>
 
         <div className={`${styles.roles} ${r(3)}`}>
           <Chip variant="neon">WEB / DEV</Chip>
-          <Chip variant="green">SOUND / DJ</Chip>
+          <Chip variant="cyan">SOUND / DJ</Chip>
           <Chip variant="neon">VISUAL / AV</Chip>
         </div>
 

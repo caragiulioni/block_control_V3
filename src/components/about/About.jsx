@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import Chip from '../shared/Chip.jsx';
+import { useState, useEffect, useRef } from 'react';
 import HudDossier from '../shared/HudDossier.jsx';
 import SectionHead from '../shared/SectionHead.jsx';
 import Panel from '../shared/Panel.jsx';
-import DecryptReveal from '../shared/DecryptReveal.jsx';
-import DecryptButton from '../shared/DecryptButton.jsx';
 import ScrollReveal from '../shared/ScrollReveal.jsx';
+import DecryptButton from '../shared/DecryptButton.jsx';
+import DecryptReveal from '../shared/DecryptReveal.jsx';
+import CapabilityMatrix from './CapabilityMatrix.jsx';
 import { useTextScramble } from '../../hooks/useTextScramble.js';
 import styles from './About.module.css';
 import chipsBg from '../../images/chips-bandw.png';
@@ -17,40 +17,57 @@ const DOSSIER_ROWS = [
   { key: 'STATUS', value: 'ACTIVE', hot: true },
 ];
 
-const SKILLS = [
-  { name: 'JAVASCRIPT', variant: 'cyan' },
-  { name: 'TYPESCRIPT', variant: 'cyan' },
-  { name: 'REACT', variant: 'cyan' },
-  { name: 'NODE.JS', variant: 'cyan' },
-  { name: 'CSS3', variant: 'cyan' },
-  { name: 'GIT', variant: 'cyan' },
-  { name: 'GRAPHQL', variant: 'cyan' },
-  { name: 'REST', variant: 'cyan' },
-  { name: 'AI WORKFLOWS', variant: 'neon' },
-  { name: 'LLM-ASSISTED DEV', variant: 'neon' },
-  { name: 'PROMPT ENGINEERING', variant: 'neon' },
-  { name: 'CONTENTFUL', variant: 'cyan' },
-  { name: 'PHOTOSHOP', variant: 'cyan' },
-  { name: 'VIDEO EDITING', variant: 'neon' },
-  { name: 'SOUND DESIGN', variant: 'neon' },
-  { name: 'PRODUCTION', variant: 'neon' },
-];
-
 const DOSSIER_CHIPS = ['DEV', 'SOUND', 'VISUAL'];
 
+const SCRAMBLE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/<>*';
+
 const About = () => {
-  const [skillsDecrypted, setSkillsDecrypted] = useState(false);
-  const [bioDecrypted, setBioDecrypted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [matrixRevealed, setMatrixRevealed] = useState(false);
+  const [decrypting, setDecrypting] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 600);
   const headingRef = useTextScramble('ABOUT', visible);
+  const btnTextRef = useRef(null);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 820);
+    const check = () => setIsMobile(window.innerWidth <= 600);
     check();
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
+
+  const handleDecrypt = () => {
+    if (decrypting) return;
+    setDecrypting(true);
+
+    // Scramble the button text
+    const el = btnTextRef.current;
+    const finalText = 'Decrypt capability matrix';
+    const len = finalText.length;
+    const dur = 800;
+    const t0 = performance.now();
+
+    function frame(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const revealed = Math.floor(p * len);
+      let out = '';
+      for (let i = 0; i < len; i++) {
+        const c = finalText[i];
+        out += c === ' ' || i < revealed ? c : SCRAMBLE_CHARS[(Math.random() * SCRAMBLE_CHARS.length) | 0];
+      }
+      if (el) el.textContent = out;
+      if (p < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        // After scramble completes, reveal the matrix
+        setTimeout(() => setMatrixRevealed(true), 200);
+      }
+    }
+
+    requestAnimationFrame(frame);
+  };
+
+  const showMatrix = !isMobile || matrixRevealed;
 
   return (
     <section className={styles.section} id="about">
@@ -70,68 +87,36 @@ const About = () => {
               <p className={styles.lead}>
                 Whether turning knobs on music equipment, working with sound, lighting and A/V gear, or coding on her computer, subject has been talking to machines for as long as she can remember.
               </p>
+              <p>
+                Subject has worked professionally in FinTech but is currently operating freelance at large.
+              </p>
 
-              {isMobile && (
-                <HudDossier
-                  title="SUBJECT DOSSIER"
-                  indicator="REC"
-                  glyph="CG"
-                  glyphMeta={{ visualId: 'REDACTED', ref: 'BLK-CTRL-00' }}
-                  rows={DOSSIER_ROWS}
-                  chips={DOSSIER_CHIPS}
-                  footerLeft="FILE 00 // VERIFIED"
-                  footerRight="0xC9·G1"
-                />
-              )}
-
-              {(!isMobile || bioDecrypted) ? (
-                <DecryptReveal>
-                  <p>
-                    For most of the subject's adult life, they organized and DJed live events. Their work as a DJ led to performances in multiple countries at various points throughout their career.
-                  </p>
-                  <p>
-                    Years in dark rooms and listening to loud music, combined with broader changes in the world, prompted a reassessment of long-term goals and where they wanted to position themselves within an evolving landscape.
-                  </p>
-                  <p>
-                    Subject subsequently began teaching themselves to code. This period included part-time coursework, numerous detours, and intermittent distractions, though they consistently returned to the discipline. Eventually they enrolled in a coding bootcamp, accelerating the transition into a professional technical career. Subject began working professionally as a developer in 2021 and currently operating freelance at large.
-                  </p>
-                </DecryptReveal>
+              {showMatrix ? (
+                isMobile ? (
+                  <DecryptReveal>
+                    <CapabilityMatrix />
+                  </DecryptReveal>
+                ) : (
+                  <CapabilityMatrix />
+                )
               ) : (
-                <DecryptButton onClick={() => setBioDecrypted(true)}>
-                  Decrypt bio
+                <DecryptButton onClick={handleDecrypt}>
+                  <span ref={btnTextRef}>Decrypt capability matrix</span>
                 </DecryptButton>
               )}
             </div>
 
-            {!isMobile && (
-              <HudDossier
-                title="SUBJECT DOSSIER"
-                indicator="REC"
-                glyph="CG"
-                glyphMeta={{ visualId: 'REDACTED', ref: 'BLK-CTRL-00' }}
-                rows={DOSSIER_ROWS}
-                chips={DOSSIER_CHIPS}
-                footerLeft="FILE 00 // VERIFIED"
-                footerRight="0xC9·G1"
-              />
-            )}
+            <HudDossier
+              title="SUBJECT DOSSIER"
+              indicator="REC"
+              glyph="CG"
+              glyphMeta={{ visualId: 'REDACTED', ref: 'BLK-CTRL-00' }}
+              rows={DOSSIER_ROWS}
+              chips={DOSSIER_CHIPS}
+              footerLeft="FILE 00 // VERIFIED"
+              footerRight="0xC9·G1"
+            />
           </div>
-
-          {!skillsDecrypted ? (
-            <DecryptButton onClick={() => setSkillsDecrypted(true)}>
-              Decrypt skillset
-            </DecryptButton>
-          ) : (
-            <DecryptReveal>
-              <div className={styles.skills}>
-                <div className={styles.skillChips}>
-                  {SKILLS.map((skill) => (
-                    <Chip key={skill.name} variant={skill.variant}>{skill.name}</Chip>
-                  ))}
-                </div>
-              </div>
-            </DecryptReveal>
-          )}
         </Panel>
       </ScrollReveal>
     </section>

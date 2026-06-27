@@ -8,8 +8,7 @@
   display: grid;
   gap: 24px;
   grid-template-columns: 1.55fr 0.95fr;
-  align-items: start;
-  margin-top: 18px;
+  align-items: stretch;
 }
 
 @media (max-width: 820px) {
@@ -33,22 +32,4 @@
 .lead {
   color: #eafffb;
   font-size: 1.05em;
-}
-
-/* Skills */
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line-soft);
-  position: relative;
-  z-index: 1;
-}
-
-.skillChips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
 }
