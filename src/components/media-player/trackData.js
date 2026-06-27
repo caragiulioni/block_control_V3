@@ -26,7 +26,7 @@ export const TRACKS = [
   {
     id: 4,
     name: 'Loop Holes',
-    description: "Bleep-bleep-boop, vocal cuts and a classic sample — subject's favourite",
+    description: "Bleep-bleep-boop, Subject's favourite",
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-loopholes.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/tracks%20thumbnails/loopholes.jpg',
     list: 'Tracks',
