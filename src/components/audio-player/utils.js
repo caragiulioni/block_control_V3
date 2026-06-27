@@ -1,5 +1,5 @@
 import keak from '../../images/KEAK.jpg';
-import riot from '../../images/riot.jpg';
+import riot from '../../images/RIOT.jpg';
 
 const allTracks = [
   {
