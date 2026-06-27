@@ -12,7 +12,6 @@
 
 .track {
   display: flex;
-  transition: transform 0.4s ease;
 }
 
 .slide {
@@ -87,7 +86,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .track {
-    transition: none;
+  .carousel {
+    /* transition handled inline — will be 'none' via matchMedia if needed */
   }
 }

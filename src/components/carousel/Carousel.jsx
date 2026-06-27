@@ -1,9 +1,9 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import styles from './Carousel.module.css';
 
 /**
- * Shared carousel component with seamless infinite loop.
- * Clones slides at edges so there's never empty space.
+ * Shared carousel with seamless infinite loop.
+ * Uses cloned slides at edges for smooth wrapping.
  */
 const Carousel = ({
   children,
@@ -14,87 +14,85 @@ const Carousel = ({
 }) => {
   const slides = Array.isArray(children) ? children : [children];
   const total = slides.length;
-  const maxIndex = Math.max(0, total - slidesPerView);
-
-  // For loop mode: prepend last `slidesPerView` slides, append first `slidesPerView`
   const cloneCount = loop ? slidesPerView : 0;
+
   const extendedSlides = loop
     ? [...slides.slice(-cloneCount), ...slides, ...slides.slice(0, cloneCount)]
     : slides;
 
-  // Internal index accounts for the prepended clones
-  const [index, setIndex] = useState(loop ? cloneCount : 0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [index, setIndex] = useState(cloneCount);
+  const [animate, setAnimate] = useState(true);
   const trackRef = useRef(null);
-  const touchStart = useRef(null);
+  const touchStartX = useRef(null);
+  const isSnapping = useRef(false);
 
   const slideWidth = 100 / slidesPerView;
   const offset = -(index * slideWidth);
 
-  // The "real" index (what the user perceives)
+  // Real index for dots/display
   const realIndex = loop
     ? ((index - cloneCount) % total + total) % total
     : index;
 
-  const goTo = useCallback((newIndex) => {
-    setIsTransitioning(true);
+  const moveTo = useCallback((newIndex) => {
+    if (isSnapping.current) return;
+    setAnimate(true);
     setIndex(newIndex);
   }, []);
 
-  const prev = () => goTo(index - 1);
-  const next = () => goTo(index + 1);
+  const prev = () => moveTo(index - 1);
+  const next = () => moveTo(index + 1);
 
-  // After transition ends, silently snap if we're on a clone
+  // After CSS transition ends, check if we need to silently snap
   const handleTransitionEnd = () => {
-    setIsTransitioning(false);
     if (!loop) return;
 
-    if (index <= cloneCount - 1) {
-      // Went past the start clones — snap to real end
-      setIndex(index + total);
-      disableTransition();
-    } else if (index >= total + cloneCount) {
-      // Went past the end clones — snap to real start
-      setIndex(index - total);
-      disableTransition();
+    let snapTo = null;
+
+    if (index >= total + cloneCount) {
+      snapTo = index - total;
+    } else if (index < cloneCount) {
+      snapTo = index + total;
+    }
+
+    if (snapTo !== null) {
+      isSnapping.current = true;
+      setAnimate(false);
+      setIndex(snapTo);
+      // Re-enable animation on next frame
+      requestAnimationFrame(() => {
+        // Need one more frame for the browser to paint the snap position
+        requestAnimationFrame(() => {
+          setAnimate(true);
+          isSnapping.current = false;
+        });
+      });
     }
   };
 
-  const disableTransition = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.transition = 'none';
-    // Force reflow then re-enable
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        track.style.transition = '';
-      });
-    });
-  };
-
-  // Keyboard nav
+  // Keyboard
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowLeft') prev();
     if (e.key === 'ArrowRight') next();
   };
 
-  // Touch/swipe
+  // Touch swipe
   const handleTouchStart = (e) => {
-    touchStart.current = e.touches[0].clientX;
+    touchStartX.current = e.touches[0].clientX;
   };
 
   const handleTouchEnd = (e) => {
-    if (touchStart.current === null) return;
-    const diff = touchStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
       diff > 0 ? next() : prev();
     }
-    touchStart.current = null;
+    touchStartX.current = null;
   };
 
-  // Dot click goes to a specific real index
+  // Dot navigation
   const goToReal = (realIdx) => {
-    goTo(realIdx + cloneCount);
+    moveTo(realIdx + cloneCount);
   };
 
   return (
@@ -112,7 +110,10 @@ const Carousel = ({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onTransitionEnd={handleTransitionEnd}
-        style={{ transform: `translateX(${offset}%)` }}
+        style={{
+          transform: `translateX(${offset}%)`,
+          transition: animate ? 'transform 0.4s ease' : 'none',
+        }}
       >
         {extendedSlides.map((slide, i) => (
           <div

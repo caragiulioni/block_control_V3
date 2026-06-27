@@ -136,3 +136,86 @@
     display: none;
   }
 }
+
+/* Decrypt button in bar */
+.decryptBtn {
+  flex: 1;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: #fff;
+  font-weight: 700;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-align: left;
+}
+
+.decryptBtn:hover {
+  color: var(--cyan);
+}
+
+.decryptBtn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.btnText {
+  color: #fff;
+}
+
+.fail {
+  color: var(--neon);
+}
+
+.prompt {
+  color: var(--neon);
+  margin-right: 6px;
+}
+
+.barTitleResolved {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  font-weight: 700;
+  flex: 1;
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: var(--cyan);
+  vertical-align: -1px;
+  margin-left: 4px;
+  box-shadow: 0 0 6px var(--cyan);
+  animation: cursorBlink 1.1s steps(1) infinite;
+}
+
+@keyframes cursorBlink {
+  50% { opacity: 0.12; }
+}
+
+/* Encrypted state — chips look glitchy */
+.pad {
+  opacity: 0.5;
+  filter: contrast(0.8);
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+.padDecrypted {
+  opacity: 1;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+
+  .pad {
+    transition: none;
+  }
+}
