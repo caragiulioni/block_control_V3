@@ -105,7 +105,7 @@ const Demos = () => {
           title="BUILDS"
           statusLabel={`0${DEMOS.length} ARTIFACTS`}
         >
-          <Carousel slidesPerView={slidesPerView} loop dots={false}>
+          <Carousel slidesPerView={slidesPerView} loop dots={false} key={slidesPerView}>
             {DEMOS.map((demo) => (
               <DemoCard key={demo.id} demo={demo} />
             ))}

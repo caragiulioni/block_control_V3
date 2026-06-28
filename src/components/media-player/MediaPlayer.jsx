@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { TRACKS } from './trackData.js';
 import Button from '../shared/Button.jsx';
+import Brackets from '../shared/Brackets.jsx';
 import styles from './MediaPlayer.module.css';
 
-const TABS = ['Tracks', 'Mixes', 'Favorites'];
+const TABS = ['Mixes', 'Tracks', 'Favorites'];
 
 // Load favorites from localStorage
 const loadFavorites = () => {
@@ -12,14 +13,14 @@ const loadFavorites = () => {
   } catch { return []; }
 };
 
-const MediaPlayer = ({ pauseRef }) => {
+const MediaPlayer = ({ pauseRef, onPlay }) => {
   const audioRef = useRef(null);
   const [currentTrackId, setCurrentTrackId] = useState(TRACKS[0].id);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
-  const [activeTab, setActiveTab] = useState('Tracks');
+  const [activeTab, setActiveTab] = useState('Mixes');
   const [favorites, setFavorites] = useState(loadFavorites);
   const [confirmRemove, setConfirmRemove] = useState(null); // track id pending removal
 
@@ -67,6 +68,15 @@ const MediaPlayer = ({ pauseRef }) => {
     }
   });
 
+  // Prevent browser from showing native media controls overlay
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.setActionHandler('play', null);
+      navigator.mediaSession.setActionHandler('pause', null);
+    }
+  }, []);
+
   const togglePlay = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -76,8 +86,9 @@ const MediaPlayer = ({ pauseRef }) => {
     } else {
       audio.play();
       setIsPlaying(true);
+      if (onPlay) onPlay();
     }
-  }, [isPlaying]);
+  }, [isPlaying, onPlay]);
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -110,6 +121,7 @@ const MediaPlayer = ({ pauseRef }) => {
     } else {
       setCurrentTrackId(trackId);
       setIsPlaying(true);
+      if (onPlay) onPlay();
     }
   };
 
@@ -195,12 +207,13 @@ const MediaPlayer = ({ pauseRef }) => {
   return (
     <div className={styles.player}>
       {/* Hidden audio element */}
-      <audio ref={audioRef} src={currentTrack.src} preload="metadata" />
+      <audio ref={audioRef} src={currentTrack.src} preload="metadata" style={{ display: 'none' }} />
 
       {/* Top row: Art + Meta + Signal/Bus */}
       <div className={styles.playerTop}>
         <div className={styles.playerLeft}>
           <div className={styles.art} style={{ backgroundImage: `url(${currentTrack.thumbnail})` }}>
+            <Brackets size={14} opacity={0.8} offset={5} />
             <div className={styles.artTag}>BLK // CTRL</div>
           </div>
 

@@ -46,7 +46,7 @@ const Hero = () => {
       />
 
       <div className={styles.core}>
-        <p className={`${styles.eyebrow} ${r(0)}`} ref={eyebrowRef}>
+        <p className={`${styles.eyebrow} ${r(0)}`} ref={eyebrowRef} aria-label="SYS recovered media index">
           SYS // recovered media index
         </p>
 

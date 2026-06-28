@@ -8,6 +8,7 @@ import Video from '../components/video/Video.jsx';
 
 const Home = () => {
   const pauseAudioRef = useRef(null);
+  const stopVideoRef = useRef(null);
 
   return (
     <>
@@ -15,9 +16,9 @@ const Home = () => {
       <main style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(40px, 8vh, 90px)' }}>
         <About />
         <Demos />
-        <Media pauseRef={pauseAudioRef} />
+        <Media pauseRef={pauseAudioRef} onPlay={() => stopVideoRef.current?.()} />
+        <Video onPlay={() => pauseAudioRef.current?.()} stopRef={stopVideoRef} />
         <Photography />
-		<Video onPlay={() => pauseAudioRef.current?.()} />
       </main>
     </>
   );

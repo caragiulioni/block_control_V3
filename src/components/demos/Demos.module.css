@@ -34,8 +34,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(6, 12, 12, 0.62), rgba(6, 12, 12, 0.86)),
-    radial-gradient(120% 120% at 30% 0%, rgba(61, 242, 208, 0.16), transparent 55%);
+    linear-gradient(180deg, rgba(6, 12, 12, 0.4), rgba(6, 12, 12, 0.7)),
+    radial-gradient(120% 120% at 30% 0%, rgba(61, 242, 208, 0.12), transparent 55%);
   transition: opacity 0.3s;
   opacity: 1;
 }
@@ -100,5 +100,11 @@
 
   .cardImage::after {
     transition: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .card:hover {
+    transform: none;
   }
 }

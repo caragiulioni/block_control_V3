@@ -46,31 +46,6 @@
   overflow: hidden;
 }
 
-.art::before,
-.art::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--cyan);
-  opacity: 0.8;
-  z-index: 2;
-}
-
-.art::before {
-  top: 5px;
-  left: 5px;
-  border-right: 0;
-  border-bottom: 0;
-}
-
-.art::after {
-  bottom: 5px;
-  right: 5px;
-  border-left: 0;
-  border-top: 0;
-}
-
 .artTag {
   position: absolute;
   bottom: 8px;
@@ -286,6 +261,16 @@
   .tbtnPlay svg {
     width: 20px;
     height: 20px;
+  }
+
+  .scrubKnob {
+    width: 18px;
+    height: 18px;
+  }
+
+  .volKnob {
+    width: 15px;
+    height: 15px;
   }
 }
 
@@ -513,6 +498,7 @@
   border: 1px solid var(--line-soft);
   border-radius: 5px;
   overflow: hidden;
+  position: relative;
 }
 
 .tabs {
@@ -570,7 +556,29 @@
 .tracklist {
   display: flex;
   flex-direction: column;
-  min-height: 240px;
+  max-height: 236px;
+  min-height: 236px;
+  overflow-y: scroll;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyan-dim) rgba(0, 0, 0, 0.3);
+}
+
+.tracklist::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tracklist::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.tracklist::-webkit-scrollbar-thumb {
+  background: var(--cyan-dim);
+  border-radius: 2px;
+}
+
+.tracklist::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
 }
 
 .trk {

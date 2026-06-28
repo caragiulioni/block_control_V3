@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Chip from '../shared/Chip.jsx';
+import Brackets from '../shared/Brackets.jsx';
+import TerminalPrompt from '../shared/TerminalPrompt.jsx';
 import styles from './CapabilityMatrix.module.css';
 
 const SCRAMBLE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/<>*█░▒▓';
@@ -54,7 +56,7 @@ const CapabilityMatrix = () => {
 
     // Scramble the button text first
     const el = titleRef.current;
-    const finalText = 'CAPABILITY MATRIX';
+    const finalText = 'CAPABILITES MATRIX';
     const len = finalText.length;
     const dur = 800;
     const t0 = performance.now();
@@ -86,21 +88,22 @@ const CapabilityMatrix = () => {
 
   return (
     <div className={styles.matrix} ref={matrixRef}>
+      <Brackets size={14} opacity={0.7} />
       <div className={styles.scan} aria-hidden="true" />
 
       <div className={styles.bar}>
         {decrypted && <span className={styles.barId}>00·B</span>}
         {!decrypted ? (
-          <button className={styles.decryptBtn} onClick={handleDecrypt} type="button">
-            <span className={styles.prompt}>&gt;</span>
-            <span ref={titleRef} className={styles.btnText}>
-              <span className={styles.fail}>FAIL</span> on matrix.decrypt() — click to resolve
-            </span><span className={styles.cursor} />
-          </button>
+          <TerminalPrompt
+            highlight="FAIL"
+            onClick={handleDecrypt}
+            textRef={titleRef}
+          >
+            on matrix.decrypt() — click to resolve
+          </TerminalPrompt>
         ) : (
           <span className={styles.barTitleResolved}>CAPABILITIES MATRIX</span>
         )}
-        {decrypted && <Chip variant="cyan">{totalModules} MODULES</Chip>}
       </div>
 
       <div className={`${styles.pad} ${decrypted ? styles.padDecrypted : ''}`}>

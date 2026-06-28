@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import Chip from './Chip.jsx';
+import Brackets from './Brackets.jsx';
 import styles from './Panel.module.css';
 
 const Panel = ({
@@ -29,6 +30,7 @@ const Panel = ({
 
   return (
     <div className={`${styles.panel} ${isOpen ? styles.open : ''}`} ref={panelRef}>
+      <Brackets />
       {bgImage && (
         <div
           className={styles.bg}

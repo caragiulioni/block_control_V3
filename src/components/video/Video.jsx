@@ -6,8 +6,13 @@ import videoThumb from '../../images/video-thumbnail.png';
 
 const YOUTUBE_ID = 'cH2-pnvJCUE';
 
-const Video = ({ onPlay }) => {
+const Video = ({ onPlay, stopRef }) => {
   const [playing, setPlaying] = useState(false);
+
+  // Register stop function so external callers can kill the video
+  if (stopRef) {
+    stopRef.current = () => setPlaying(false);
+  }
 
   const handlePlay = () => {
     if (onPlay) onPlay();
@@ -32,7 +37,7 @@ const Video = ({ onPlay }) => {
             {/* HUD corners */}
             <span className={styles.hudTL}>NODE_MTL — SHIFT RADIO</span>
             <span className={styles.hudTR}>FEED 02·C</span>
-            <span className={styles.hudBL}>PROMO // 01</span>
+            <span className={styles.hudBL}>PROMO <span aria-hidden='true'>//</span> 01</span>
             <span className={styles.hudBR}>
               <span className={playing ? styles.active : styles.standby}>
                 {playing ? 'ACTIVE' : 'STANDBY'}

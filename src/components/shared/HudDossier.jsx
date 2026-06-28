@@ -28,11 +28,11 @@ const HudDossier = ({
         <div className={styles.glyph}>{glyph}</div>
         <div className={styles.rmeta}>
           <div>
-            <span className={styles.metaLabel}>VISUAL ID //</span>{' '}
+            <span className={styles.metaLabel}>VISUAL ID <span aria-hidden="true">//</span></span>{' '}
             <span className={styles.metaValue}>{glyphMeta.visualId}</span>
           </div>
           <div>
-            <span className={styles.metaLabel}>REF //</span> {glyphMeta.ref}
+            <span className={styles.metaLabel}>REF <span aria-hidden="true">//</span></span> {glyphMeta.ref}
           </div>
         </div>
       </div>
@@ -97,7 +97,12 @@ const HudDossier = ({
       {children}
 
       <div className={styles.foot}>
-        <span>{footerLeft}</span>
+        <span>{footerLeft.includes('//')
+          ? footerLeft.split('//').map((part, i, arr) => (
+              <span key={i}>{part}{i < arr.length - 1 && <span aria-hidden="true">//</span>}</span>
+            ))
+          : footerLeft
+        }</span>
         <span>{footerRight}</span>
       </div>
     </aside>
