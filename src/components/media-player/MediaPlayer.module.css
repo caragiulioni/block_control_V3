@@ -556,8 +556,8 @@
 .tracklist {
   display: flex;
   flex-direction: column;
-  max-height: 290px;
-  min-height: 290px;
+  max-height: 236px;
+  min-height: 236px;
   overflow-y: scroll;
   position: relative;
   scrollbar-width: thin;
@@ -581,6 +581,13 @@
 
 .tracklist::-webkit-scrollbar-thumb:hover {
   background: var(--cyan);
+}
+
+@media (max-width: 600px) {
+  .tracklist {
+    max-height: 260px;
+    min-height: 260px;
+  }
 }
 
 .trk {
