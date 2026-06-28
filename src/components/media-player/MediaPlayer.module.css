@@ -556,8 +556,8 @@
 .tracklist {
   display: flex;
   flex-direction: column;
-  max-height: 236px;
-  min-height: 236px;
+  max-height: 290px;
+  min-height: 290px;
   overflow-y: scroll;
   position: relative;
   scrollbar-width: thin;
@@ -565,7 +565,8 @@
 }
 
 .tracklist::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
+  display: block;
 }
 
 .tracklist::-webkit-scrollbar-track {
@@ -574,7 +575,8 @@
 
 .tracklist::-webkit-scrollbar-thumb {
   background: var(--cyan-dim);
-  border-radius: 2px;
+  border-radius: 3px;
+  min-height: 30px;
 }
 
 .tracklist::-webkit-scrollbar-thumb:hover {

@@ -219,7 +219,13 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
 
           <div className={styles.meta}>
             <div className={styles.nowPlaying} aria-live="polite">
-              <span aria-hidden="true">{isPlaying ? '▶' : '⏸'}</span>{' '}
+              <span aria-hidden="true" style={{ display: 'inline-flex', verticalAlign: 'middle', marginRight: '6px' }}>
+                {isPlaying ? (
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="var(--neon)"><path d="M8 5.5v13a1 1 0 001.54.84l10-6.5a1 1 0 000-1.68l-10-6.5A1 1 0 008 5.5z"/></svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="var(--neon)"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                )}
+              </span>
               {isPlaying ? 'NOW PLAYING' : 'PAUSED'}
             </div>
             <h3 className={styles.title}>{currentTrack.name}</h3>
