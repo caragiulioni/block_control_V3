@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import TerminalPrompt from '../shared/TerminalPrompt.jsx';
 import Button from '../shared/Button.jsx';
 import { useTextScramble } from '../../hooks/useTextScramble.js';
@@ -13,6 +13,32 @@ function scrambleText(text) {
 const Footer = () => {
   const [state, setState] = useState('encrypted'); // 'encrypted' | 'scrambling' | 'decrypted'
   const [dialogOpen, setDialogOpen] = useState(false);
+  const triggerRef = useRef(null);
+  const dialogRef = useRef(null);
+
+  // Focus management for dialog
+  useEffect(() => {
+    if (dialogOpen && dialogRef.current) {
+      const focusable = dialogRef.current.querySelector('button');
+      if (focusable) focusable.focus();
+    }
+  }, [dialogOpen]);
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+    // Return focus to the decrypted area
+    if (triggerRef.current) triggerRef.current.focus();
+  };
+
+  // Close dialog on Escape
+  useEffect(() => {
+    if (!dialogOpen) return;
+    const handleKey = (e) => {
+      if (e.key === 'Escape') closeDialog();
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [dialogOpen]);
 
   const handleDecrypt = () => {
     setState('scrambling');
@@ -22,11 +48,15 @@ const Footer = () => {
     }, 1300);
   };
 
+  const successMsg = 'blockcontrol.isViewed() — STATUS: 200 - Thanks for stopping by!'
+
   // Only attach scramble when transitioning
   const scrambleRef = useTextScramble(
-    'blockcontrol.isViewed() — STATUS: 200',
+    successMsg,
     state === 'scrambling'
   );
+
+
 
   return (
     <>
@@ -35,7 +65,7 @@ const Footer = () => {
           /* Encrypted / scrambling state */
           <div className={styles.encrypted}>
             {state === 'encrypted' ? (
-              <TerminalPrompt highlight="FAIL" onClick={handleDecrypt}>
+              <TerminalPrompt highlight="FAIL" onClick={handleDecrypt} ariaLabel="Decrypt footer — reveal site information">
                 on footer.decrypt() — click to resolve
               </TerminalPrompt>
             ) : (
@@ -53,7 +83,7 @@ const Footer = () => {
           <div className={styles.decryptedWrap}>
             <div className={styles.successRow}>
               <TerminalPrompt variant="success" highlight="OK">
-                blockcontrol.isViewed() — STATUS: 200:
+                {successMsg}
               </TerminalPrompt>
             </div>
             <div className={styles.row}>
@@ -66,22 +96,22 @@ const Footer = () => {
 
       {/* Easter egg dialog */}
       {dialogOpen && (
-        <div className={styles.overlay}>
-          <div className={styles.dialog} role="dialog" aria-modal="true" aria-label="About this site">
+        <div className={styles.overlay} onClick={closeDialog}>
+          <div className={styles.dialog} role="dialog" aria-modal="true" aria-label="About this site" ref={dialogRef} onClick={(e) => e.stopPropagation()}>
             <span className={styles.dialogScanline} />
             <div className={styles.dialogContent}>
               <p className={styles.dialogLead}>
-                <span className={styles.dialogSlash} aria-hidden="true">//</span> This is the V3 of Block Control and man, we have come a long way.
+                <span className={styles.dialogSlash} aria-hidden="true">//</span> This is the V3 of Block Control. We've come a long way.
               </p>
               <p>
-                Big ideas, no time and some still developing skills became an accumulation of visual references, language research and code sandboxing compiled over an embarrassing number of years. The long awaited back-burner feature is live via the custom built music player, which was a gentle reminder that as simple as an app looks on the surface, building it always has surprises and layers of complexity.
+                Big ideas, no time and some still developing skills became an accumulation of visual references, language research and code sandboxing compiled over a few years. In addtion to the UI overhaul, a long awaited back-burner feature is finally live via the custom built music player. The player component was a gentle reminder that as simple as an app looks on the surface, building it always has surprises and layers of complexity.
               </p>
               <p>
-                Thank you so much for stopping by and if you have feedback, found bugs or just want to chat, please say HI using the Contact form.
+                Thanks for checking out my site and if you have feedback, found bugs or just want to chat, send a signal from the Connect form.
               </p>
             </div>
             <div className={styles.dialogActions}>
-              <Button variant="filled" color="cyan" onClick={() => setDialogOpen(false)}>
+              <Button variant="filled" color="cyan" onClick={closeDialog}>
                 CLOSE
               </Button>
             </div>

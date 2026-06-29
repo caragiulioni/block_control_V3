@@ -10,7 +10,7 @@ import styles from './TerminalPrompt.module.css';
  * @param {React.Ref} textRef - Optional ref for the text span (for scramble animations)
  * @param {'error'|'success'} variant - Color scheme (default: 'error')
  */
-const TerminalPrompt = ({ highlight, children, onClick, textRef, variant = 'error' }) => {
+const TerminalPrompt = ({ highlight, children, onClick, textRef, variant = 'error', ariaLabel }) => {
   const isSuccess = variant === 'success';
 
   const content = (
@@ -29,7 +29,7 @@ const TerminalPrompt = ({ highlight, children, onClick, textRef, variant = 'erro
   }
 
   return (
-    <button className={styles.btn} onClick={onClick} type="button">
+    <button className={styles.btn} onClick={onClick} type="button" aria-label={ariaLabel}>
       {content}
     </button>
   );

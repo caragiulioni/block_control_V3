@@ -42,7 +42,6 @@ const CapabilityMatrix = () => {
   const [scrambledLabels, setScrambledLabels] = useState([]);
   const titleRef = useRef(null);
   const matrixRef = useRef(null);
-  const totalModules = GROUPS.reduce((sum, g) => sum + g.skills.length, 0);
 
   // Generate scrambled versions on mount
   useEffect(() => {
@@ -97,6 +96,7 @@ const CapabilityMatrix = () => {
             highlight="FAIL"
             onClick={handleDecrypt}
             textRef={titleRef}
+            ariaLabel="Decrypt capabilities matrix — reveal skills"
           >
             on matrix.decrypt() — Click to resolve
           </TerminalPrompt>
