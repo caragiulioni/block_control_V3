@@ -156,13 +156,12 @@ const TransmitTerminal = ({ transmitting, onComplete, success, bufferLength }) =
   return (
     <div className={styles.wrap}>
       {/* Terminal output area */}
-      <div
-        className={styles.term}
-        ref={termRef}
-      >
+      <div className={styles.term}>
         {phase === 'idle' && !success && (
           <span className={styles.cursor} />
         )}
+        {/* Imperative DOM target — only used when typing/done, hidden from React children */}
+        <div ref={termRef} style={{ display: phase === 'idle' && !success ? 'none' : 'block' }} />
       </div>
 
       {/* Progress bar */}
