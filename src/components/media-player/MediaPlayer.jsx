@@ -352,7 +352,7 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
           ))}
         </div>
 
-        <div className={styles.tracklist}>
+        <div className={styles.tracklist} key={activeTab}>
           {displayedTracks.length === 0 && activeTab === 'Favorites' && (
             <div className={styles.emptyState}><Note variant='muted' prefix={true} text='You dont have favorites yet!'/></div>
           )}

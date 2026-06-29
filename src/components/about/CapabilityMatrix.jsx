@@ -98,7 +98,7 @@ const CapabilityMatrix = () => {
             onClick={handleDecrypt}
             textRef={titleRef}
           >
-            on matrix.decrypt() — click to resolve
+            on matrix.decrypt() — Click to resolve
           </TerminalPrompt>
         ) : (
           <span className={styles.barTitleResolved}>CAPABILITIES MATRIX</span>

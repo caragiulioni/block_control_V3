@@ -1,0 +1,165 @@
+.footer {
+  max-width: var(--maxw);
+  margin: clamp(40px, 8vh, 90px) auto 0;
+  padding: 26px clamp(16px, 4vw, 40px) 40px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-dim);
+}
+
+/* Encrypted state */
+.encrypted {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.scrambledRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.scrambled {
+  color: var(--neon);
+  opacity: 0.6;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+/* Decrypted state */
+.decryptedWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.successRow {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.link {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.tag {
+  color: var(--neon);
+}
+
+@media (max-width: 600px) {
+  .encrypted {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .successRow {
+    text-align: left;
+  }
+}
+
+/* Dialog overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(5, 9, 10, 0.85);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 40px);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dialog {
+  position: relative;
+  max-width: 620px;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(10, 21, 23, 0.95), rgba(7, 14, 15, 0.98));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: dialogIn 0.5s ease;
+}
+
+@keyframes dialogIn {
+  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+.dialogScanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--cyan) 22%, #eafffb 50%, var(--cyan) 78%, transparent);
+  box-shadow: 0 0 16px var(--cyan);
+  animation: dialogWipe 0.85s ease-out forwards;
+}
+
+@keyframes dialogWipe {
+  0% { top: 0; opacity: 0; }
+  12% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.dialogContent {
+  font-family: var(--body);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.dialogContent p {
+  margin: 0 0 1em;
+}
+
+.dialogContent p:last-child {
+  margin-bottom: 0;
+}
+
+.dialogLead {
+  color: #eafffb;
+  font-size: 1.05em;
+  font-weight: 500;
+}
+
+.dialogSlash {
+  color: var(--neon);
+  margin-right: 6px;
+}
+
+.dialogActions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}

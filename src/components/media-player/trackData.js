@@ -50,7 +50,7 @@ export const TRACKS = [
   {
     id: 7,
     name: 'DJ Demo 01',
-    description: 'Last known entry',
+    description: 'Bassy beats, Techno and more. Last known entry',
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-djdemo-last-entry.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/mixes%20thumbnails/lastentry.jpg',
     list: 'Mixes',
@@ -58,7 +58,7 @@ export const TRACKS = [
   {
     id: 8,
     name: 'DJ Demo 02',
-    description: 'Not Found — Techno',
+    description: 'Techno and gets a bit dark',
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-djdemo-notfound.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/mixes%20thumbnails/unknown.jpg',
     list: 'Mixes',
