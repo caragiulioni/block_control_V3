@@ -74,8 +74,8 @@ const Footer = () => {
               </TerminalPrompt>
             )}
             <div className={styles.scrambledRow}>
-              <span className={styles.scrambled}>{scrambleText('www.blockcontrol.ca')}</span>
-              <span className={styles.scrambled}>{scrambleText("FROM THEN 'TIL NOW.")}</span>
+              <span className={styles.scrambled}>{scrambleText('BLOCKCONTROL')}</span>
+              <span className={styles.scrambled}>{scrambleText('GITHUB')}</span>
             </div>
           </div>
         ) : (
@@ -87,8 +87,8 @@ const Footer = () => {
               </TerminalPrompt>
             </div>
             <div className={styles.row}>
-              <span><a className={styles.link} href="https://www.blockcontrol.ca/">www.blockcontrol.ca</a></span>
-              <span className={styles.tag}>FROM THEN 'TIL NOW.</span>
+              <span className={styles.tag}>BLOCKCONTROL</span>
+              <span><a className={styles.link} href="https://github.com/caragiulioni/block_control_V3" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></span>
             </div>
           </div>
         )}
@@ -96,8 +96,8 @@ const Footer = () => {
 
       {/* Easter egg dialog */}
       {dialogOpen && (
-        <div className={styles.overlay} onClick={closeDialog}>
-          <div className={styles.dialog} role="dialog" aria-modal="true" aria-label="About this site" ref={dialogRef} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.overlay}>
+          <div className={styles.dialog} role="dialog" aria-modal="true" aria-label="About this site" ref={dialogRef}>
             <span className={styles.dialogScanline} />
             <div className={styles.dialogContent}>
               <p className={styles.dialogLead}>
@@ -111,7 +111,7 @@ const Footer = () => {
               </p>
             </div>
             <div className={styles.dialogActions}>
-              <Button variant="filled" color="cyan" onClick={closeDialog}>
+              <Button variant="outlined" color="cyan" onClick={closeDialog}>
                 CLOSE
               </Button>
             </div>

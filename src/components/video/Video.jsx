@@ -3,9 +3,9 @@ import Panel from '../shared/Panel.jsx';
 import ScrollReveal from '../shared/ScrollReveal.jsx';
 import Note from '../shared/Note.jsx';
 import styles from './Video.module.css';
-import videoThumb from '../../images/video-thumbnail.png';
 
 const YOUTUBE_ID = 'cH2-pnvJCUE';
+const VIDEO_THUMB = 'https://storage.googleapis.com/blockcontrol-2026/video-thumbnail.jpg';
 
 const Video = ({ onPlay, stopRef }) => {
   const [playing, setPlaying] = useState(false);
@@ -58,7 +58,7 @@ const Video = ({ onPlay, stopRef }) => {
                 className={styles.poster}
                 onClick={handlePlay}
                 aria-label="Play video"
-                style={{ backgroundImage: `url(${videoThumb})` }}
+                style={{ backgroundImage: `url(${VIDEO_THUMB})` }}
               >
                 <span className={styles.playBtn}>
                   <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor">

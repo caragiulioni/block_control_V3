@@ -8,6 +8,7 @@ import Note from '../shared/Note.jsx';
 import TransmitTerminal from './TransmitTerminal.jsx';
 import { useTextScramble } from '../../hooks/useTextScramble.js';
 import styles from './Contact.module.css';
+import chipsBg from '../../images/chips-bandw.png';
 
 const Contact = () => {
   const [visible, setVisible] = useState(false);
@@ -55,7 +56,7 @@ const Contact = () => {
           CONNECT
         </SectionHead>
 
-        <Panel id="03·A" title="SIGNAL RELAY" statusLabel="OPEN">
+        <Panel id="03·A" title="SIGNAL RELAY" statusLabel="OPEN" bgImage={chipsBg}>
           <div className={styles.grid}>
             {/* Left: Form */}
             <div className={styles.formCol}>
@@ -122,7 +123,7 @@ const Contact = () => {
 
                 <div className={styles.formFooter}>
                   <Button
-                    variant="filled"
+                    variant="outlined"
                     color="neon"
                     onClick={handleSubmit}
                     disabled={transmitting || success}
@@ -130,6 +131,12 @@ const Contact = () => {
                     TRANSMIT <span aria-hidden="true">→</span>
                   </Button>
                   <Note prefix variant="muted" text="all fields required" />
+                </div>
+
+                {/* Screen reader announcement for form state */}
+                <div aria-live="polite" aria-atomic="true" className={styles.srOnly}>
+                  {success && 'Message sent successfully. You will receive a confirmation email shortly.'}
+                  {transmitting && !success && 'Sending your message…'}
                 </div>
               </form>
             </div>

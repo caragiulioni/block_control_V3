@@ -8,6 +8,7 @@ import Video from '../components/video/Video.jsx';
 import Contact from '../components/contact/Contact.jsx';
 import Links from '../components/links/Links.jsx';
 import Footer from '../components/footer/Footer.jsx';
+import Gateway from '../components/gateway/Gateway.jsx';
 
 const Home = () => {
   const pauseAudioRef = useRef(null);
@@ -15,6 +16,7 @@ const Home = () => {
 
   return (
     <>
+      <Gateway />
       <Hero />
       <main style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(40px, 8vh, 90px)' }}>
         <About />
