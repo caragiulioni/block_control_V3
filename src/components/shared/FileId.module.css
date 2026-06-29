@@ -1,0 +1,7 @@
+.id {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--cyan-dim);
+  flex: 0 0 auto;
+}

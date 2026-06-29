@@ -12,7 +12,7 @@ const TopBar = ({ left, right }) => {
   return (
     <div className={styles.topbar}>
       <span>{left}</span>
-      <span>
+      <span className={styles.tocd}>
         {right} <span className={styles.clock}>{time}</span>
       </span>
     </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Panel from '../shared/Panel.jsx';
 import ScrollReveal from '../shared/ScrollReveal.jsx';
+import Note from '../shared/Note.jsx';
 import styles from './Video.module.css';
 import videoThumb from '../../images/video-thumbnail.png';
 
@@ -23,7 +24,7 @@ const Video = ({ onPlay, stopRef }) => {
     <section style={{ position: 'relative', marginBottom: 'clamp(16px, 3vh, 26px)' }} id="video">
       <ScrollReveal>
         <Panel
-          id="02·C"
+          id="02·B"
           title="VIDEO"
           statusLabel="01 CLIP"
           statusVariant="neon"
@@ -36,7 +37,7 @@ const Video = ({ onPlay, stopRef }) => {
 
             {/* HUD corners */}
             <span className={styles.hudTL}>NODE_MTL — SHIFT RADIO</span>
-            <span className={styles.hudTR}>FEED 02·C</span>
+            <span className={styles.hudTR}>FEED 02·B</span>
             <span className={styles.hudBL}>PROMO <span aria-hidden='true'>//</span> 01</span>
             <span className={styles.hudBR}>
               <span className={playing ? styles.active : styles.standby}>
@@ -67,6 +68,7 @@ const Video = ({ onPlay, stopRef }) => {
               </button>
             )}
           </div>
+		  <Note prefix={true} variant='muted' text='This player uses the youtube.nocookie prefix to prevent tracking.'/>
         </Panel>
       </ScrollReveal>
     </section>

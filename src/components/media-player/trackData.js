@@ -1,10 +1,10 @@
 export const TRACKS = [
   {
-    id: 1,
-    name: 'Super Hyphy RMX',
-    description: "Let's get dumb",
-    src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-superhyphyrmx.mp3',
-    thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/tracks%20thumbnails/superhyphyrmx.jpg',
+    id: 4,
+    name: 'Loop Holes',
+    description: "Bleep-bleep-boop, Subject's favourite",
+    src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-loopholes.mp3',
+    thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/tracks%20thumbnails/loopholes.jpg',
     list: 'Tracks',
   },
   {
@@ -16,19 +16,19 @@ export const TRACKS = [
     list: 'Tracks',
   },
   {
+    id: 1,
+    name: 'Super Hyphy RMX',
+    description: "Let's get dumb",
+    src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-superhyphyrmx.mp3',
+    thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/tracks%20thumbnails/superhyphyrmx.jpg',
+    list: 'Tracks',
+  },
+  {
     id: 3,
     name: 'Hells Bells',
     description: 'Dark, gloomy, built to break down',
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-hellsbells.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/tracks%20thumbnails/hellsbells.jpg',
-    list: 'Tracks',
-  },
-  {
-    id: 4,
-    name: 'Loop Holes',
-    description: "Bleep-bleep-boop, Subject's favourite",
-    src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-loopholes.mp3',
-    thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/tracks%20thumbnails/loopholes.jpg',
     list: 'Tracks',
   },
   {
@@ -50,7 +50,7 @@ export const TRACKS = [
   {
     id: 7,
     name: 'DJ Demo 01',
-    description: 'Last known entry — Techno',
+    description: 'Last known entry',
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-djdemo-last-entry.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/mixes%20thumbnails/lastentry.jpg',
     list: 'Mixes',
@@ -66,7 +66,7 @@ export const TRACKS = [
   {
     id: 9,
     name: 'DJ Demo 03',
-    description: 'Rap, funky and half time — live on Nasty.FM w/ Knife and Fork Radio',
+    description: 'Rap, funky and half time on Knife and Fork Radio',
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-djdemo-live-on-knifeandfork-radio.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/mixes%20thumbnails/knifeandfork.jpg',
     list: 'Mixes',
@@ -74,7 +74,7 @@ export const TRACKS = [
   {
     id: 10,
     name: 'DJ Demo 04',
-    description: 'Special guest techno mix for the Conkrete MTL family',
+    description: 'Techno for the Conkrete MTL family',
     src: 'https://storage.googleapis.com/blockcontrol-2026/blockcontrol-djdemo-for-conkrete-mtl.mp3',
     thumbnail: 'https://storage.googleapis.com/blockcontrol-2026/mixes%20thumbnails/concrete.jpg',
     list: 'Mixes',

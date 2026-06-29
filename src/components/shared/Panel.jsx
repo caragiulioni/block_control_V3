@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import Chip from './Chip.jsx';
 import Brackets from './Brackets.jsx';
+import FileId from './FileId.jsx';
 import styles from './Panel.module.css';
 
 const Panel = ({
@@ -45,7 +46,7 @@ const Panel = ({
           aria-expanded={isOpen}
           type="button"
         >
-          <span className={styles.id}>{id}</span>
+          <FileId>{id}</FileId>
           <span className={styles.title}>{title}</span>
           {statusLabel && (
             <span className={styles.status}>
@@ -58,7 +59,7 @@ const Panel = ({
         </button>
       ) : (
         <div className={styles.header}>
-          <span className={styles.id}>{id}</span>
+          <FileId>{id}</FileId>
           <span className={styles.title}>{title}</span>
           {statusLabel && (
             <span className={styles.status}>

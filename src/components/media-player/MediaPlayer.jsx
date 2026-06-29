@@ -2,7 +2,9 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { TRACKS } from './trackData.js';
 import Button from '../shared/Button.jsx';
 import Brackets from '../shared/Brackets.jsx';
+import Note from '../shared/Note.jsx';
 import styles from './MediaPlayer.module.css';
+
 
 const TABS = ['Mixes', 'Tracks', 'Favorites'];
 
@@ -15,7 +17,7 @@ const loadFavorites = () => {
 
 const MediaPlayer = ({ pauseRef, onPlay }) => {
   const audioRef = useRef(null);
-  const [currentTrackId, setCurrentTrackId] = useState(TRACKS[0].id);
+  const [currentTrackId, setCurrentTrackId] = useState(TRACKS.find((t) => t.list === 'Mixes').id);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -246,7 +248,7 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
           </div>
           <div className={styles.eqLabel}>AUDIO BUS // <span style={{ color: isPlaying ? 'var(--cyan)' : 'var(--neon)' }}>{isPlaying ? 'LIVE' : 'STANDBY'}</span></div>
           <div className={styles.eq}>
-            {Array.from({ length: 15 }).map((_, i) => (
+            {Array.from({ length: 49 }).map((_, i) => (
               <span
                 key={i}
                 className={styles.eqBar}
@@ -352,17 +354,13 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
 
         <div className={styles.tracklist}>
           {displayedTracks.length === 0 && activeTab === 'Favorites' && (
-            <p className={styles.emptyState}><span className={styles.storageSlash} aria-hidden="true">//</span> You don't have favorites yet!</p>
+            <div className={styles.emptyState}><Note variant='muted' prefix={true} text='You dont have favorites yet!'/></div>
           )}
           {displayedTracks.length === 0 && activeTab === 'Favorites' && (
-            <p className={styles.storageNote}>
-              <span className={styles.storageSlash} aria-hidden="true">//</span> This player uses local device storage to maintain your Favorites. Block Control does not store your personal data. 
-            </p>
+			<Note variant='muted' prefix={true} text='This player uses local device storage to maintain your Favorites. Block Control does not store your personal data. '/>
           )}
-		            {displayedTracks.length === 0 && activeTab === 'Favorites' && (
-            <p className={styles.storageNote}>
-              <span className={styles.storageSlash} aria-hidden="true">//</span> Any stored data can be cleared via your browser settings at anytime.
-            </p>
+		  {displayedTracks.length === 0 && activeTab === 'Favorites' && (
+			<Note variant='muted' prefix={true} text='Any stored data can be cleared via your browser settings at anytime.'/>
           )}
           {displayedTracks.map((track, i) => {
             const isActive = track.id === currentTrackId;

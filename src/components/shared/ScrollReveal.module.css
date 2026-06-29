@@ -22,7 +22,7 @@
   pointer-events: none;
   background: linear-gradient(90deg, transparent, var(--cyan) 22%, #eafffb 50%, var(--cyan) 78%, transparent);
   box-shadow: 0 0 16px var(--cyan);
-  animation: wipe 0.85s ease-out forwards;
+  animation: wipe 2s ease-out forwards;
 }
 
 @keyframes wipe {

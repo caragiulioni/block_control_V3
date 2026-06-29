@@ -11,7 +11,7 @@
   border: 0;
   cursor: pointer;
   text-align: left;
-  transition: color 0.2s;
+  transition: color 0.2s ease-in-out;
 }
 
 .btn:hover {
@@ -21,6 +21,15 @@
 .btn:focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 2px;
+}
+
+.static {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: #fff;
+  font-weight: 700;
 }
 
 .prompt {
@@ -34,6 +43,10 @@
 
 .highlight {
   color: var(--neon);
+}
+
+.success {
+	color: var(--cyan)
 }
 
 .cursor {

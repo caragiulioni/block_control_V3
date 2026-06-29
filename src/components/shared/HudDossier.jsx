@@ -1,7 +1,9 @@
 import Chip from './Chip.jsx';
+import FileId from './FileId.jsx';
 import styles from './HudDossier.module.css';
 
 const HudDossier = ({
+  fileId,
   title = 'SUBJECT DOSSIER',
   indicator = 'STBY',
   glyph = 'CG',
@@ -17,9 +19,10 @@ const HudDossier = ({
     <aside className={styles.hud}>
       <div className={styles.scan} aria-hidden="true" />
       <div className={styles.bar}>
-        <span>{title}</span>
+        {fileId && <FileId>{fileId}</FileId>}
+        <h3 className={styles.barTitle}>{title}</h3>
         <span className={styles.rec}>
-          <i className={styles.recDot} />
+          <i className={styles.recDot} aria-hidden="true" />
           {indicator}
         </span>
       </div>

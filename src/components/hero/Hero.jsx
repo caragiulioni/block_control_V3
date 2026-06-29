@@ -41,12 +41,12 @@ const Hero = () => {
       <div className={styles.grid} />
 
       <TopBar
-        left={<><b>BLOCKCONTROL</b> <span className={styles.topBarSub}>NODE_MTL <span style={{ color: 'var(--neon)' }}>//</span> <span style={{ color: 'var(--cyan)' }}>ONLINE</span></span></>}
+        left={<><b>BLOCKCONTROL</b> <span className={styles.topBarSub}><span style={{ color: 'var(--ink)' }}>NODE_MTL</span> <span style={{ color: 'var(--neon)' }}>//</span> <span style={{ color: 'var(--cyan)' }}>ONLINE</span></span></>}
         right="TOD TC"
       />
 
       <div className={styles.core}>
-        <p className={`${styles.eyebrow} ${r(0)}`} ref={eyebrowRef} aria-label="SYS recovered media index">
+        <p className={`${styles.eyebrow} ${r(0)}`} ref={eyebrowRef}>
           SYS // recovered media index
         </p>
 

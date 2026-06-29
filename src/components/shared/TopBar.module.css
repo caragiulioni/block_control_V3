@@ -15,11 +15,16 @@
   text-align: right;
 }
 
+
+
 .topbar b {
-  color: var(--cyan);
+  color: var(--neon);
   letter-spacing: 0.34em;
 }
 
+.tocd{
+	color: var(--cyan)
+}
 .clock {
   color: var(--ink);
 }

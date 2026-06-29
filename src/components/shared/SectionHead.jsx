@@ -14,8 +14,10 @@ const formatEyebrow = (text) => {
 const SectionHead = ({ eyebrow, children, headingRef }) => {
   return (
     <div className={styles.head}>
-      <p className={styles.eyebrow}>{formatEyebrow(eyebrow)}</p>
       <h2 ref={headingRef}>{children}</h2>
+	  {/* technically this isnt an eyebrow but its fine... */}
+      <p className={styles.eyebrow}>{formatEyebrow(eyebrow)}</p>
+
     </div>
   );
 };

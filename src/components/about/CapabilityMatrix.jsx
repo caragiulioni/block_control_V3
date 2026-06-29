@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Chip from '../shared/Chip.jsx';
 import Brackets from '../shared/Brackets.jsx';
+import FileId from '../shared/FileId.jsx';
 import TerminalPrompt from '../shared/TerminalPrompt.jsx';
 import styles from './CapabilityMatrix.module.css';
 
@@ -89,10 +90,8 @@ const CapabilityMatrix = () => {
   return (
     <div className={styles.matrix} ref={matrixRef}>
       <Brackets size={14} opacity={0.7} />
-      <div className={styles.scan} aria-hidden="true" />
-
       <div className={styles.bar}>
-        {decrypted && <span className={styles.barId}>00·B</span>}
+        {decrypted && <FileId>00·B</FileId>}
         {!decrypted ? (
           <TerminalPrompt
             highlight="FAIL"

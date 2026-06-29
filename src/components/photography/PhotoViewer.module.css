@@ -79,7 +79,7 @@
   z-index: 4;
   width: 42px;
   height: 64px;
-  border: 1px solid var(--line);
+  border: 2px solid var(--cyan-dim);
   background: rgba(4, 9, 10, 0.6);
   color: var(--cyan);
   cursor: pointer;
@@ -87,13 +87,31 @@
   display: grid;
   place-items: center;
   backdrop-filter: blur(4px);
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .navBtn:hover {
   background: var(--cyan);
   color: #04110e;
+  border-color: var(--cyan);
+}
+
+.navBtn:active {
+  background: var(--cyan);
+  color: #04110e;
+}
+
+.navBtn:focus:not(:focus-visible) {
+  background: rgba(4, 9, 10, 0.6);
+  color: var(--cyan);
+  border-color: var(--cyan-dim);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
 }
 
 .navPrev { left: 10px; }

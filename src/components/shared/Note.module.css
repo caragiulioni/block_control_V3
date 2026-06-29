@@ -1,0 +1,20 @@
+.note {
+  padding: 12px clamp(14px, 3vw, 22px);
+  font-family: var(--mono);
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.noteMute {
+  padding: 12px clamp(14px, 3vw, 22px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+.slash {
+  color: var(--neon);
+}
+

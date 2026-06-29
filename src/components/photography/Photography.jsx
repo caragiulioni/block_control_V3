@@ -8,7 +8,7 @@ const Photography = () => {
     <section style={{ position: 'relative', marginBottom: 'clamp(16px, 3vh, 26px)' }} id="photography">
       <ScrollReveal>
         <Panel
-          id="03·A"
+          id="02·C"
           title="GALLERY"
           statusLabel={`${PHOTOS.length} FRAMES`}
           statusVariant="neon"

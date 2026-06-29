@@ -37,16 +37,17 @@ const About = () => {
           <div className={styles.dossier}>
             <div className={styles.prose}>
               <p className={styles.lead}>
-                Whether turning knobs on music equipment, working with sound, lighting and A/V gear, or coding on her computer, subject has been talking to machines for as long as she can remember.
+                Whether turning knobs on music equipment, working with sound, lighting and A/V gear or coding on her computer, Subject has been talking to machines for as long as she can remember.
               </p>
               <p>
-                Subject has worked professionally in FinTech but currently operates freelance.
+                Subject has worked professionally in FinTech but is currently operating freelance.
               </p>
 
               <CapabilityMatrix />
             </div>
 
             <HudDossier
+              fileId="00·C"
               title="SUBJECT DOSSIER"
               indicator="REC"
               glyph="CG"

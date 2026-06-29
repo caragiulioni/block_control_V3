@@ -133,7 +133,7 @@
   flex: 1;
   height: 6px;
   border-radius: 3px;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--ink-faint);
   border: 1px solid var(--line-soft);
   position: relative;
   cursor: pointer;
@@ -291,7 +291,7 @@
   width: 140px;
   height: 8px;
   border-radius: 4px;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--ink-faint);
   border: 1px solid var(--line-soft);
   position: relative;
   cursor: pointer;
@@ -303,7 +303,7 @@
   top: 0;
   bottom: 0;
   border-radius: 3px;
-  background: var(--cyan);
+  background: linear-gradient(90deg, var(--cyan-dim), var(--cyan));
   box-shadow: 0 0 6px rgba(61, 242, 208, 0.4);
 }
 
@@ -426,7 +426,7 @@
   background:
     linear-gradient(rgba(61, 242, 208, 0.4) 1px, transparent 1px),
     linear-gradient(90deg, rgba(61, 242, 208, 0.4) 1px, transparent 1px);
-  background-size: 10px 10px;
+  background-size: 8px 8px;
   opacity: 0.4;
 }
 
@@ -529,7 +529,7 @@
 }
 
 .tabOn {
-  color: var(--cyan);
+  color: white;
 }
 
 .tabOn::after {
@@ -545,12 +545,9 @@
 
 .tabCount {
   font-size: 10px;
-  color: var(--ink-faint);
+  color: var(--dim);
 }
 
-.tabOn .tabCount {
-  color: var(--cyan-dim);
-}
 
 /* Track list */
 .tracklist {
@@ -688,7 +685,7 @@
 .npeq {
   display: inline-flex;
   align-items: flex-end;
-  gap: 2px;
+  gap: 1px;
   width: 26px;
   height: 16px;
   justify-content: center;
@@ -768,23 +765,6 @@
 /* Empty favorites state */
 .emptyState {
   padding: 24px clamp(14px, 3vw, 22px);
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: var(--ink-faint);
-  text-align: center;
 }
 
-/* Storage note in favorites tab */
-.storageNote {
-  padding: 12px clamp(14px, 3vw, 22px);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--ink-faint);
-  text-align: center;
-}
 
-.storageSlash {
-  color: var(--neon);
-}

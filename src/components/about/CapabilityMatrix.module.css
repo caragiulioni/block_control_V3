@@ -37,12 +37,6 @@
   border-bottom: 1px solid var(--line-soft);
 }
 
-.barId {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--cyan-dim);
-}
-
 .barTitle {
   font-size: 0.8rem;
   letter-spacing: 0.12em;
