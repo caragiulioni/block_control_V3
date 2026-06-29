@@ -101,17 +101,20 @@ const Footer = () => {
             <span className={styles.dialogScanline} />
             <div className={styles.dialogContent}>
               <p className={styles.dialogLead}>
-                <span className={styles.dialogSlash} aria-hidden="true">//</span> This is the V3 of Block Control. We've come a long way.
+                <span className={styles.dialogSlash} aria-hidden="true">//</span> This Block Control V3.
               </p>
               <p>
-                Big ideas, no time and some still developing skills became an accumulation of visual references, language research and code sandboxing compiled over a few years. In addtion to the UI overhaul, a long awaited back-burner feature is finally live via the custom built music player. The player component was a gentle reminder that as simple as an app looks on the surface, building it always has surprises and layers of complexity.
+                Big ideas, no time and some still developing skills became an accumulation of visual references, language research and code sandboxing compiled over a few years. 
               </p>
+			  <p>
+				A long awaited back-burner feature is finally live via the custom built music player. The player component was a gentle reminder that as simple as an app looks on the surface, building it has surprises and layers of complexity.
+			  </p>
               <p>
                 Thanks for checking out my site and if you have feedback, found bugs or just want to chat, send a signal from the Connect form.
               </p>
             </div>
             <div className={styles.dialogActions}>
-              <Button variant="outlined" color="cyan" onClick={closeDialog}>
+              <Button variant="filled" color="cyan" onClick={closeDialog}>
                 CLOSE
               </Button>
             </div>

@@ -403,8 +403,8 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
                 {confirmRemove === track.id && (
                   <div className={styles.confirmDialog}>
                     <span>Remove?</span>
-                    <Button variant="outlined" color="cyan" onClick={(e) => { e.stopPropagation(); confirmRemoveFavorite(); }}>Y</Button>
-                    <Button variant="outlined" color="neon" onClick={(e) => { e.stopPropagation(); cancelRemove(); }}>N</Button>
+                    <Button variant="filled" color="cyan" onClick={(e) => { e.stopPropagation(); confirmRemoveFavorite(); }}>Y</Button>
+                    <Button variant="filled" color="neon" onClick={(e) => { e.stopPropagation(); cancelRemove(); }}>N</Button>
                   </div>
                 )}
               </div>

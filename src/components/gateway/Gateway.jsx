@@ -226,7 +226,7 @@ const Gateway = () => {
     >
       {isExiting && <span className={styles.sweep} />}
       <div className={`${styles.card} ${isExiting ? styles.cardExit : ''} ${isDenied ? styles.cardDenied : ''}`}>
-        <Brackets color={isDenied ? 'var(--neon)' : 'var(--cyan)'} />
+        <Brackets key={phase} color={isDenied ? 'var(--neon)' : 'var(--cyan)'} />
 
         <p className={styles.eyebrow}>SECURE NODE <span aria-hidden="true">//</span> HANDSHAKE</p>
 
@@ -250,13 +250,18 @@ const Gateway = () => {
           </div>
         </div>
 
+        {/* Screen reader announcements */}
+        <div aria-live="assertive" aria-atomic="true" className={styles.srOnly}>
+          {isDenied && 'Access denied. Re-authenticating…'}
+        </div>
+
         {/* Prompt + buttons */}
         <p className={`${styles.prompt} ${isReady ? styles.promptVisible : ''}`}>
           <span className={styles.promptQ} aria-hidden="true">&gt;</span> grant access to BLOCKCONTROL? [Y/N]
         </p>
         <div className={`${styles.btns} ${isReady ? styles.btnsVisible : ''}`}>
           <Button
-            variant="outlined"
+            variant="filled"
             color="cyan"
             onClick={handleEnter}
             aria-label="Grant access — enter site"
@@ -264,7 +269,7 @@ const Gateway = () => {
             Y <span className={styles.btnHint}>ENTER</span>
           </Button>
           <Button
-            variant="outlined"
+            variant="filled"
             color="neon"
             onClick={handleDeny}
             aria-label="Deny access"

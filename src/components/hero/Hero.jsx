@@ -1,35 +1,11 @@
-import { useEffect, useState } from 'react';
 import TopBar from '../shared/TopBar.jsx';
 import Chip from '../shared/Chip.jsx';
 import { useTextScramble } from '../../hooks/useTextScramble.js';
 import styles from './Hero.module.css';
 import ewaste from '../../images/ewaste.jpg';
 
-const REVEAL_STAGGER_MS = 140;
-const REVEAL_COUNT = 5;
-
 const Hero = () => {
-  const [revealed, setRevealed] = useState(-1);
-  const eyebrowRef = useTextScramble('SYS // recovered media index', revealed >= 0);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) {
-      setRevealed(REVEAL_COUNT);
-      return;
-    }
-
-    const timers = [];
-    for (let i = 0; i < REVEAL_COUNT; i++) {
-      timers.push(
-        setTimeout(() => setRevealed(i), 300 + i * REVEAL_STAGGER_MS)
-      );
-    }
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  const r = (index) =>
-    `${styles.reveal} ${revealed >= index ? styles.revealIn : ''}`;
+  const eyebrowRef = useTextScramble('SYS // recovered media index', true);
 
   return (
     <header className={styles.hero}>
@@ -46,27 +22,27 @@ const Hero = () => {
       />
 
       <div className={styles.core}>
-        <p className={`${styles.eyebrow} ${r(0)}`} ref={eyebrowRef}>
+        <p className={styles.eyebrow} ref={eyebrowRef}>
           SYS // recovered media index
         </p>
 
-        <h1 className={`${styles.title} ${r(1)}`}>
+        <h1 className={styles.title}>
           BLOCK<span className={styles.titleAccent}>CONTROL</span>
         </h1>
 
-        <p className={`${styles.sub} ${r(2)}`}>
+        <p className={styles.sub}>
           Online record for <b>Cara Giulioni</b><br />
-          <span style={{ color: 'var(--green)' }}>&gt;</span> software for web // development<br />
+          <span style={{ color: 'var(--green)' }}>&gt;</span> web development<br />
           <span style={{ color: 'var(--green)' }}>&gt;</span> visual &amp; auditory arts
         </p>
 
-        <div className={`${styles.roles} ${r(3)}`}>
+        <div className={styles.roles}>
           <Chip variant="neon">WEB / DEV</Chip>
           <Chip variant="cyan">SOUND / DJ</Chip>
           <Chip variant="neon">VISUAL / AV</Chip>
         </div>
 
-        <span className={`${styles.scrollCue} ${r(4)}`}>
+        <span className={styles.scrollCue}>
           SCROLL TO DECRYPT <span className={styles.blink}>▾</span>
         </span>
       </div>

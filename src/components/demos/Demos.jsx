@@ -127,7 +127,7 @@ const DemoCard = ({ demo }) => {
             {demo.links.map((link) => (
               <Button
                 key={link.label}
-                variant="outlined"
+                variant="filled"
                 color={link.variant === 'neon' ? 'neon' : 'cyan'}
                 href={link.url}
               >
