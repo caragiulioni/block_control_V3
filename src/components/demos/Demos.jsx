@@ -11,9 +11,9 @@ import styles from './Demos.module.css';
 const DEMOS = [
   {
     id: 'DEMO_01',
-    title: 'Block Control - Legacy',
+    title: 'Block Control V2',
     description: 'How far we\'ve come from here...Poowered by GraphQL using Contentful, webhook via Netlify.',
-    tech: ['REACT', 'CSS', 'DESIGN', 'CONTENTFUL', 'UI'],
+    tech: ['REACT', 'DESIGN', 'CONTENTFUL', 'UI/UX'],
     image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/block-control%20-legacy.png',
     links: [
       { label: 'GITHUB', url: 'https://github.com/caragiulioni/block_control' },
@@ -24,7 +24,7 @@ const DEMOS = [
     id: 'DEMO_02',
     title: 'Streamshare',
     description: 'Bootcamp final project. What are you watching?',
-    tech: ['REACT', 'CSS', 'NODE', 'MONGODB', 'UI'],
+    tech: ['REACT', 'NODE.JS', 'MONGODB', 'UI/UX'],
     image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/streamshare.png',
     links: [
       { label: 'GITHUB', url: 'https://github.com/caragiulioni/streamshare' },
@@ -35,28 +35,17 @@ const DEMOS = [
     id: 'DEMO_03',
     title: 'YYZ Tech',
     description: 'E-commerce group project. FE and BE store, collaboration focused.',
-    tech: ['REACT', 'REDUX', 'CSS', 'NODE.JS', 'EXPRESS', 'UI'],
+    tech: ['REACT', 'REDUX', 'NODE.JS', 'EXPRESS', 'UI/UX'],
     image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/yyztech.png',
     links: [
       { label: 'GITHUB', url: 'https://github.com/caragiulioni/listed-e-commerce' },
     ],
   },
   {
-    id: 'DEMO_04',
-    title: 'Auberge 259',
-    description: 'Hotel Auberge 259, Montréal. Logo by John Hatz.',
-    tech: ['VUE.JS', 'CSS', 'UI'],
-    image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/auberge.png',
-    links: [
-      { label: 'GITHUB', url: 'https://github.com/caragiulioni/auberge259' },
-      { label: 'LIVE', url: 'https://www.auberge259.com/', variant: 'neon' },
-    ],
-  },
-  {
     id: 'DEMO_05',
     title: 'Memory MayHem',
     description: 'Matching kids game based on Super Mario 3 bonus challenge.',
-    tech: ['JAVASCRIPT', 'CSS', 'ILLUSTRATION', 'UI'],
+    tech: ['JAVASCRIPT', 'ILLUSTRATION', 'UI/UX'],
     image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/memorymayhem.jpg',
     links: [
       { label: 'GITHUB', url: 'https://github.com/caragiulioni/memorymayhem' },
@@ -67,7 +56,7 @@ const DEMOS = [
     id: 'DEMO_06',
     title: 'Happy Feet',
     description: 'Avoid the blocks! A little buggy but still cute and fun. Why not?',
-    tech: ['JAVASCRIPT', 'CSS', 'CANVAS', 'ILLUSTRATION', 'UI'],
+    tech: ['JAVASCRIPT', 'CANVAS'],
     image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/happyfeet.png',
     links: [
       { label: 'GITHUB', url: 'https://github.com/caragiulioni/happyfeetlegacy' },
