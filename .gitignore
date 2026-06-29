@@ -23,8 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
+# Environment variables (secrets)
+.env
+.env.*
+
 # Reference assets (source material, not deployed)
 _references/
 
 # Kiro
 .kiro/
+
+# Local Netlify folder
+.netlify
