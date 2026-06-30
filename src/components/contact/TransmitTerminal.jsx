@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import ProgressBar from '../shared/ProgressBar.jsx';
+import { startTypewriter } from '../../utils/typewriter.js';
 import styles from './TransmitTerminal.module.css';
 
 const TX_LINES = [
@@ -55,18 +56,10 @@ const TransmitTerminal = ({ transmitting, onComplete, success, bufferLength }) =
       return;
     }
 
-    // Line-at-a-time reveal (lighter than char-by-char)
-    let li = 0;
-    function stepLine() {
-      if (li >= TX_LINES.length) {
-        startBar();
-        return;
-      }
-      renderLine(term, TX_LINES[li]);
-      li++;
-      timeoutRef.current = setTimeout(stepLine, 200);
-    }
-    stepLine();
+    // Character-by-character typewriter
+    startTypewriter(term, TX_LINES, styles, () => {
+      startBar();
+    }, timeoutRef, { charDelay: 22, longCharDelay: 8, lineDelay: 160 });
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);

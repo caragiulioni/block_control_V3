@@ -3,6 +3,7 @@ import Chip from '../shared/Chip.jsx';
 import Brackets from '../shared/Brackets.jsx';
 import Button from '../shared/Button.jsx';
 import ProgressBar from '../shared/ProgressBar.jsx';
+import { startTypewriter } from '../../utils/typewriter.js';
 import styles from './Gateway.module.css';
 
 const BOOT_LINES = [
@@ -72,19 +73,11 @@ const Gateway = () => {
       return;
     }
 
-    // Line-at-a-time reveal (lighter than char-by-char)
-    let li = 0;
-    function stepLine() {
-      if (li >= BOOT_LINES.length) {
-        appendCursor(term);
-        runBar();
-        return;
-      }
-      renderLine(term, BOOT_LINES[li]);
-      li++;
-      timeoutRef.current = setTimeout(stepLine, 180);
-    }
-    stepLine();
+    // Character-by-character typewriter
+    startTypewriter(term, BOOT_LINES, styles, () => {
+      appendCursor(term);
+      runBar();
+    }, timeoutRef);
   }
 
   function runBar() {
@@ -133,19 +126,11 @@ const Gateway = () => {
       return;
     }
 
-    // Line-at-a-time reveal
-    let li = 0;
-    function stepLine() {
-      if (li >= DENIED_LINES.length) {
-        appendCursor(term);
-        timeoutRef.current = setTimeout(boot, 1100);
-        return;
-      }
-      renderLine(term, DENIED_LINES[li]);
-      li++;
-      timeoutRef.current = setTimeout(stepLine, 180);
-    }
-    stepLine();
+    // Character-by-character typewriter
+    startTypewriter(term, DENIED_LINES, styles, () => {
+      appendCursor(term);
+      timeoutRef.current = setTimeout(boot, 1100);
+    }, timeoutRef);
   }
 
   function renderLine(container, segments) {
