@@ -23,12 +23,12 @@ const SystemDown = () => {
         left={
           <>
             <b>BLOCKCONTROL</b>{' '}
-            <span className={styles.dot}>//</span> NODE_MTL{' '}
-            <span className={styles.dot}>//</span>{' '}
+            <span className={styles.dot} aria-hidden="true">//</span> NODE_MTL{' '}
+            <span className={styles.dot} aria-hidden="true">//</span>{' '}
             <span className={styles.offline}>OFFLINE</span>
           </>
         }
-        right={<>SYS 0xDEAD ·</>}
+        right={<>SYS 0xDEAD <span aria-hidden="true">·</span></>}
       />
 
       <div className={styles.stage}>
@@ -63,7 +63,7 @@ const SystemDown = () => {
                   type="button"
                   onClick={handleRetry}
                 >
-                  ⟳ RETRY HANDSHAKE
+                  <span aria-hidden="true">⟳</span> RETRY HANDSHAKE
                 </button>
                 <span className={styles.note}>
                   auto-reboot looping // operator standby

@@ -54,6 +54,8 @@ The internet is for everyone. This site is built with that in mind:
 - Focus-visible styling throughout for keyboard users
 - Semantic HTML, proper heading hierarchy, and landmark regions
 
+This site leans heavily into interactive flair — decrypt buttons, terminal animations, and visual effects. I wanted to challenge myself to make those moments work for everyone, not just visually. If you or someone you know navigates with a screen reader and has thoughts on how the experience could be better, I'd genuinely love to hear it. Reach out through the contact form.
+
 ## Local Development
 
 ```bash

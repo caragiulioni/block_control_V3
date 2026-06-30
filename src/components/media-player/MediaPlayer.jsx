@@ -216,7 +216,7 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
         <div className={styles.playerLeft}>
           <div className={styles.art} style={{ backgroundImage: `url(${currentTrack.thumbnail})` }}>
             <Brackets size={14} opacity={0.8} offset={5} />
-            <div className={styles.artTag}>BLK // CTRL</div>
+            <div className={styles.artTag} aria-hidden="true">BLK // CTRL</div>
           </div>
 
           <div className={styles.meta}>
@@ -375,7 +375,7 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
                 aria-label={`Play ${track.name}`}
               >
                 {isActive && isPlaying ? (
-                  <span className={styles.npeq}><i /><i /><i /></span>
+                  <span className={styles.npeq} aria-hidden="true"><i /><i /><i /></span>
                 ) : (
                   <span className={styles.trkNum}>{(i + 1).toString().padStart(2, '0')}</span>
                 )}

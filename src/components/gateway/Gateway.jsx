@@ -180,6 +180,11 @@ const Gateway = () => {
     >
       {isExiting && <span className={styles.sweep} />}
       <div className={`${styles.card} ${isExiting ? styles.cardExit : ''} ${isDenied ? styles.cardDenied : ''}`}>
+        {/* Screen reader welcome — visually hidden */}
+        <p className={styles.srOnly}>
+          Welcome to Block Control. This site has interactive easter eggs and hidden features. My goal was to make those moments enjoyable for everyone, regardless of how you browse. If you have feedback on the screen reader experience, I'd love to hear it through the contact form. Press Y or Enter to continue.
+        </p>
+
         <Brackets key={phase} color={isDenied ? 'var(--neon)' : 'var(--cyan)'} />
 
         <p className={styles.eyebrow}>SECURE NODE <span aria-hidden="true">//</span> HANDSHAKE</p>

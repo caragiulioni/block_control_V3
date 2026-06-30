@@ -35,11 +35,11 @@ const Video = ({ onPlay, stopRef }) => {
             {/* Scanline overlay — hidden once playing */}
             {!playing && <div className={styles.overlay} />}
 
-            {/* HUD corners */}
-            <span className={styles.hudTL}>NODE_MTL — SHIFT RADIO</span>
-            <span className={styles.hudTR}>FEED 02·B</span>
-            <span className={styles.hudBL}>PROMO <span aria-hidden='true'>//</span> 01</span>
-            <span className={styles.hudBR}>
+            {/* HUD corners — decorative */}
+            <span className={styles.hudTL} aria-hidden="true">NODE_MTL — SHIFT RADIO</span>
+            <span className={styles.hudTR} aria-hidden="true">FEED 02·B</span>
+            <span className={styles.hudBL} aria-hidden="true">PROMO <span aria-hidden='true'>//</span> 01</span>
+            <span className={styles.hudBR} aria-hidden="true">
               <span className={playing ? styles.active : styles.standby}>
                 {playing ? 'ACTIVE' : 'STANDBY'}
               </span>
@@ -57,7 +57,8 @@ const Video = ({ onPlay, stopRef }) => {
               <button
                 className={styles.poster}
                 onClick={handlePlay}
-                aria-label="Play video"
+                aria-label="Play promo video — Block Control on Shift Radio"
+                role="img"
                 style={{ backgroundImage: `url(${VIDEO_THUMB})` }}
               >
                 <span className={styles.playBtn}>

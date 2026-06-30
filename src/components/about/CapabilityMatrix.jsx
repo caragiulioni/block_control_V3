@@ -105,7 +105,7 @@ const CapabilityMatrix = () => {
         )}
       </div>
 
-      <div className={`${styles.pad} ${decrypted ? styles.padDecrypted : ''}`}>
+      <div className={`${styles.pad} ${decrypted ? styles.padDecrypted : ''}`} aria-hidden={!decrypted}>
         {GROUPS.map((group, gi) => (
           <div className={styles.group} key={group.label}>
             <div className={`${styles.label} ${group.labelAlt ? styles.labelAlt : ''}`}>

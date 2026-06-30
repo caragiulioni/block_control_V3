@@ -15,7 +15,7 @@ const DecryptReveal = ({ children }) => {
 
   return (
     <div ref={ref} className={`${styles.reveal} ${show ? styles.revealed : ''}`}>
-      <span className={styles.scanline} />
+      <span className={styles.scanline} aria-hidden="true" />
       {children}
     </div>
   );

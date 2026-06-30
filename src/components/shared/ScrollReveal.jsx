@@ -42,7 +42,7 @@ const ScrollReveal = ({ children, className = '', onResolved, scanline = false }
       ref={ref}
       className={`${styles.resolve} ${resolved ? styles.resolved : ''} ${className}`}
     >
-      {resolved && scanline && <span className={styles.scanline} />}
+      {resolved && scanline && <span className={styles.scanline} aria-hidden="true" />}
       {children}
     </div>
   );

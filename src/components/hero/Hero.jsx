@@ -23,7 +23,7 @@ const Hero = () => {
 
       <div className={styles.core}>
         <p className={styles.eyebrow} ref={eyebrowRef}>
-          SYS // recovered media index
+          SYS <span aria-hidden='true'>//</span> recovered media index
         </p>
 
         <h1 className={styles.title}>
@@ -32,8 +32,8 @@ const Hero = () => {
 
         <p className={styles.sub}>
           Online record for <b>Cara Giulioni</b><br />
-          <span style={{ color: 'var(--green)' }}>&gt;</span> web development<br />
-          <span style={{ color: 'var(--green)' }}>&gt;</span> visual &amp; auditory arts
+          <span aria-hidden="true" style={{ color: 'var(--green)' }}>&gt;</span> web development<br />
+          <span aria-hidden="true" style={{ color: 'var(--green)' }}>&gt;</span> visual &amp; auditory arts
         </p>
 
         <div className={styles.roles}>
@@ -42,7 +42,7 @@ const Hero = () => {
           <Chip variant="neon">VISUAL / AV</Chip>
         </div>
 
-        <span className={styles.scrollCue}>
+        <span aria-hidden='true' className={styles.scrollCue}>
           SCROLL TO DECRYPT <span className={styles.blink}>▾</span>
         </span>
       </div>

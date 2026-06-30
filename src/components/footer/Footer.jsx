@@ -74,7 +74,7 @@ const Footer = () => {
                 {'\u00A0'}
               </TerminalPrompt>
             )}
-            <div className={styles.scrambledRow}>
+            <div className={styles.scrambledRow} aria-hidden="true">
               <span className={styles.scrambled}>{scrambleText('BLOCKCONTROL')}</span>
               <span className={styles.scrambled}>{scrambleText('GITHUB')}</span>
             </div>
@@ -96,7 +96,8 @@ const Footer = () => {
       </footer>
 
       <div className={styles.notes}>
-        <Note prefix variant="muted" text="WCAG 2.2 AA compliant: Uses semantic HTML, logical heading hierarchies, keyboard focus indicators, and full screen-reader optimizations. Easter eggs included :)" />
+        <Note prefix variant="muted" text="WCAG 2.2 AA compliant: Uses semantic HTML, logical heading hierarchies, keyboard focus indicators, and full screen-reader optimizations." />
+		<Note prefix variant="muted" text="This site has interactive easter eggs and hidden features. My goal was to make those moments enjoyable for everyone, regardless of how you browse. If you have feedback on the screen reader experience, I'd love to hear it through the contact form." />
         <Note prefix variant="muted" text="Motion Accessible: Respects user reduced-motion preferences and keeps active animations safely under the 3Hz flashing threshold." />
       </div>
 

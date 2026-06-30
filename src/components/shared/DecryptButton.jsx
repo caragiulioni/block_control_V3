@@ -7,8 +7,8 @@ const DecryptButton = ({ children, onClick }) => {
       onClick={onClick}
       type="button"
     >
-      <span className={styles.prompt}>&gt;</span> {children}
-      <span className={styles.cursor} />
+      <span className={styles.prompt} aria-hidden="true">&gt;</span> {children}
+      <span className={styles.cursor} aria-hidden="true" />
     </button>
   );
 };
