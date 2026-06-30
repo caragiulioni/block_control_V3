@@ -123,7 +123,7 @@ const Contact = () => {
 
                 <div className={styles.formFooter}>
                   <Button
-                    variant="outlined"
+                    variant="filled"
                     color="neon"
                     onClick={handleSubmit}
                     disabled={transmitting || success}

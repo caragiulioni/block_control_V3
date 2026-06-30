@@ -95,8 +95,8 @@ const Demos = () => {
           statusLabel={`0${DEMOS.length} ARTIFACTS`}
         >
           <Carousel slidesPerView={slidesPerView} loop dots={false} key={slidesPerView}>
-            {DEMOS.map((demo) => (
-              <DemoCard key={demo.id} demo={demo} />
+            {DEMOS.map((demo, index) => (
+              <DemoCard key={demo.id} demo={demo} index={index} />
             ))}
           </Carousel>
         </Panel>
@@ -105,14 +105,16 @@ const Demos = () => {
   );
 };
 
-const DemoCard = ({ demo }) => {
+const DemoCard = ({ demo, index }) => {
+  const number = String(index + 1).padStart(2, '0');
+
   return (
     <article className={styles.card}>
       <div
         className={styles.cardImage}
         style={{ backgroundImage: `url(${demo.image})` }}
       >
-        <span className={styles.cardNo}>{demo.id}</span>
+        <span className={styles.cardNo}>DEMO_{number}</span>
       </div>
       <div className={styles.cardBody}>
         <h3 className={styles.cardTitle}>{demo.title}</h3>

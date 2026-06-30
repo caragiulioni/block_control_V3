@@ -67,7 +67,7 @@ function buildEmailHtml(name) {
           <!-- Header -->
           <tr>
             <td style="padding:20px 24px;border:1px solid rgba(61,242,208,0.22);border-bottom:none;border-radius:6px 6px 0 0;background-color:#0a1517;">
-              <p style="margin:0;font-size:11px;letter-spacing:3px;color:#1f8d7c;">
+              <p style="margin:0;font-size:11px;letter-spacing:3px;color:#ff4f7a;">
                 BLOCKCONTROL // AUTO-REPLY
               </p>
             </td>
@@ -79,29 +79,23 @@ function buildEmailHtml(name) {
 
               <!-- Terminal output -->
               <div style="background-color:rgba(0,0,0,0.5);border:1px solid rgba(61,242,208,0.12);border-radius:4px;padding:16px 18px;margin-bottom:24px;">
-                <p style="margin:0 0 8px;font-size:13px;color:#3df2d0;line-height:1.8;">
-                  <span aria-hidden="true">&gt;</span> TRANSMISSION RECEIVED
-                </p>
-                <p style="margin:0 0 8px;font-size:13px;color:#3df2d0;line-height:1.8;">
-                  <span aria-hidden="true">&gt;</span> RECIPIENT: ${greeting}
-                </p>
-                <p style="margin:0 0 8px;font-size:13px;color:#3df2d0;line-height:1.8;">
-                  <span aria-hidden="true">&gt;</span> SIGNAL STRENGTH: ████████████ STRONG
+                <p style="margin:0 0 8px;font-size:13px;color:#cfe7e3;line-height:1.8;">
+                  <span aria-hidden="true">&gt;</span> <span style="color:#3df2d0">TRANSMISSION RECEIVED</span>
                 </p>
                 <p style="margin:0 0 8px;font-size:13px;color:#cfe7e3;line-height:1.8;">
-                  <span aria-hidden="true">&gt;</span> STATUS: QUEUED FOR REVIEW
+                  <span aria-hidden="true">&gt;</span> RECIPIENT: <span style="color:#3df2d0">${greeting}</span>
                 </p>
-                <p style="margin:0;font-size:13px;color:#ff4f7a;line-height:1.8;">
-                  <span aria-hidden="true">&gt;</span> STANDBY FOR OPERATOR RESPONSE
+                <p style="margin:0 0 8px;font-size:13px;color:#cfe7e3;line-height:1.8;">
+                  <span aria-hidden="true">&gt;</span> SIGNAL STRENGTH: <span style="color:#3df2d0">STRONG</span>
+                </p>
+                <p style="margin:0 0 8px;font-size:13px;color:#cfe7e3;line-height:1.8;">
+                  <span aria-hidden="true">&gt;</span> STATUS: <span style="color:#3df2d0">QUEUED FOR REVIEW - STANDBY FOR OPERATOR RESPONSE</span>
                 </p>
               </div>
 
               <!-- Message -->
-              <p style="margin:0 0 16px;font-size:14px;color:#cfe7e3;line-height:1.7;">
+              <p style="margin:0 0 16px;font-size:14px;color:#cfe7e3;line-height:1.5;">
                 Thanks for your form submission, I'll get back to you shortly.
-              </p>
-              <p style="margin:0;font-size:14px;color:#7fa39d;line-height:1.7;">
-                In the meantime, feel free to poke around the site if you haven't already.
               </p>
 
             </td>
@@ -115,8 +109,12 @@ function buildEmailHtml(name) {
                   <td style="font-size:10px;letter-spacing:2px;color:#4f6b67;">
                     <a href="https://www.blockcontrol.ca" style="color:#3df2d0;text-decoration:none;">WWW.BLOCKCONTROL.CA</a>
                   </td>
-                  <td align="right" style="font-size:10px;letter-spacing:2px;color:#4f6b67;">
-                    AUTO-REPLY // DO NOT RESPOND
+                </tr>
+                <tr>
+                  <td>
+                    <p style="margin:8px 0 0;font-size:13px;color:#ff4f7a;line-height:1.8;">
+                      AUTO-REPLY <span aria-hidden="true">//</span> DO NOT RESPOND
+                    </p>
                   </td>
                 </tr>
               </table>
