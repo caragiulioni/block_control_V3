@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import ProgressBar from '../shared/ProgressBar.jsx';
 import styles from './TransmitTerminal.module.css';
 
 const TX_LINES = [
@@ -151,8 +152,6 @@ const TransmitTerminal = ({ transmitting, onComplete, success, bufferLength }) =
     el.appendChild(cur);
   }
 
-  const barColorClass = phase === 'done' || success ? styles.fillSuccess : styles.fillTx;
-
   return (
     <div className={styles.wrap}>
       {/* Terminal output area */}
@@ -165,17 +164,11 @@ const TransmitTerminal = ({ transmitting, onComplete, success, bufferLength }) =
       </div>
 
       {/* Progress bar */}
-      <div className={styles.bar}>
-        <div className={styles.barLab}>
-          <span>{barMsg}</span>
-          <b className={phase === 'done' || success ? styles.pctOk : styles.pctTx}>
-            {String(pct).padStart(3, '0')}%
-          </b>
-        </div>
-        <div className={styles.track}>
-          <div className={`${styles.fill} ${barColorClass}`} style={{ width: `${pct}%` }} />
-        </div>
-      </div>
+      <ProgressBar
+        pct={pct}
+        msg={barMsg}
+        variant={phase === 'done' || success ? 'success' : 'tx'}
+      />
 
       {/* Buffer readout */}
       <div className={styles.footer}>

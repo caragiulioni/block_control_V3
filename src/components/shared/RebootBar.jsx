@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from './RebootBar.module.css';
+import ProgressBar from './ProgressBar.jsx';
 
 const RebootBar = ({ trigger }) => {
   const [pct, setPct] = useState(0);
@@ -44,17 +44,7 @@ const RebootBar = ({ trigger }) => {
     tick();
   }
 
-  return (
-    <div className={styles.reboot}>
-      <div className={styles.lab}>
-        <span>{msg}</span>
-        <b>{String(pct).padStart(2, '0')}%</b>
-      </div>
-      <div className={styles.track}>
-        <div className={styles.fill} style={{ width: `${pct}%` }} />
-      </div>
-    </div>
-  );
+  return <ProgressBar pct={pct} msg={msg} variant="tx" />;
 };
 
 export default RebootBar;

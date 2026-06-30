@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import TerminalPrompt from '../shared/TerminalPrompt.jsx';
 import Button from '../shared/Button.jsx';
+import Note from '../shared/Note.jsx';
 import { useTextScramble } from '../../hooks/useTextScramble.js';
 import styles from './Footer.module.css';
 
@@ -93,6 +94,11 @@ const Footer = () => {
           </div>
         )}
       </footer>
+
+      <div className={styles.notes}>
+        <Note prefix variant="muted" text="WCAG 2.2 AA compliant: Uses semantic HTML, logical heading hierarchies, keyboard focus indicators, and full screen-reader optimizations. Easter eggs included :)" />
+        <Note prefix variant="muted" text="Motion Accessible: Respects user reduced-motion preferences and keeps active animations safely under the 3Hz flashing threshold." />
+      </div>
 
       {/* Easter egg dialog */}
       {dialogOpen && (

@@ -4,7 +4,7 @@
 
 **[www.blockcontrol.ca](https://www.blockcontrol.ca)**
 
-Personal portfolio site for Cara Giulioni — developer, DJ, visual artist. This is the third iteration of Block Control, rebuilt from the ground up.
+Personal portfolio site. This is the third iteration of Block Control, rebuilt from the ground up.
 
 ---
 
@@ -38,7 +38,7 @@ The site auto-deploys via Netlify webhook on push to `main`.
 
 ## Email / DNS Setup
 
-- Domain email (`signal@blockcontrol.ca`) managed through IONOS
+- Custom domain email managed through IONOS
 - Gmail alias configured for sending/receiving as the domain address
 - Resend handles transactional auto-reply emails via API
 - DNS records include SPF and DKIM entries for Resend domain verification

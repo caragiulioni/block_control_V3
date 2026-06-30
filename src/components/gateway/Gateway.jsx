@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Chip from '../shared/Chip.jsx';
 import Brackets from '../shared/Brackets.jsx';
 import Button from '../shared/Button.jsx';
+import ProgressBar from '../shared/ProgressBar.jsx';
 import styles from './Gateway.module.css';
 
 const BOOT_LINES = [
@@ -240,14 +241,12 @@ const Gateway = () => {
         <div className={styles.term} ref={termRef} aria-hidden="true" />
 
         {/* Progress bar */}
-        <div className={styles.bar} aria-hidden="true">
-          <div className={styles.barLab}>
-            <span>{barMsg}</span>
-            <b className={styles.barPct}>{String(pct).padStart(3, '0')}%</b>
-          </div>
-          <div className={styles.track}>
-            <div className={styles.fill} style={{ width: `${pct}%` }} />
-          </div>
+        <div aria-hidden="true">
+          <ProgressBar
+            pct={pct}
+            msg={barMsg}
+            variant={phase === 'ready' || phase === 'exiting' ? 'success' : 'tx'}
+          />
         </div>
 
         {/* Screen reader announcements */}

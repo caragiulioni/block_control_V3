@@ -5,7 +5,7 @@
  */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_EMAIL = 'signal@blockcontrol.ca';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@blockcontrol.ca';
 const FROM_NAME = 'Operator';
 
 export async function handler(event) {
