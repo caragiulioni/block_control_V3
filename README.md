@@ -44,6 +44,16 @@ The site auto-deploys via Netlify webhook on push to `main`.
 - DNS records include SPF and DKIM entries for Resend domain verification
 - Netlify Function (`submission-created`) triggers on every form submission and sends a styled HTML auto-reply to the submitter
 
+## Accessibility
+
+The internet is for everyone. This site is built with that in mind:
+
+- All animations respect `prefers-reduced-motion` — if you have reduced motion enabled, animations are disabled and content is shown immediately
+- Animations that do run are designed within safe parameters to avoid triggering photosensitive responses (no flashing above 3Hz, no large-area luminance changes)
+- Interactive features like the gateway overlay and footer easter egg are fully accessible via screen reader (descriptive aria-labels, live announcements, keyboard navigation)
+- Focus-visible styling throughout for keyboard users
+- Semantic HTML, proper heading hierarchy, and landmark regions
+
 ## Local Development
 
 ```bash
