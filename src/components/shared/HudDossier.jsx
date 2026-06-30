@@ -16,7 +16,7 @@ const HudDossier = ({
   children,
 }) => {
   return (
-    <aside className={styles.hud}>
+    <aside className={styles.hud} aria-hidden="true">
       <div className={styles.scan} aria-hidden="true" />
       <div className={styles.bar}>
         {fileId && <FileId>{fileId}</FileId>}

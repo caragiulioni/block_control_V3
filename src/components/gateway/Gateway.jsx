@@ -64,7 +64,6 @@ const Gateway = () => {
     term.innerHTML = '';
 
     if (reducedMotion.current) {
-      // Instant: render everything, go straight to ready
       BOOT_LINES.forEach((line) => renderLine(term, line));
       appendCursor(term);
       setPct(100);
@@ -73,42 +72,19 @@ const Gateway = () => {
       return;
     }
 
-    // Typewriter
-    let li = 0, si = 0, ci = 0;
-    let curLine = null, curSpan = null;
-
-    function step() {
+    // Line-at-a-time reveal (lighter than char-by-char)
+    let li = 0;
+    function stepLine() {
       if (li >= BOOT_LINES.length) {
         appendCursor(term);
         runBar();
         return;
       }
-      const line = BOOT_LINES[li];
-      if (si === 0 && ci === 0) {
-        curLine = document.createElement('div');
-        term.appendChild(curLine);
-      }
-      const seg = line[si];
-      if (ci === 0) {
-        curSpan = document.createElement('span');
-        if (seg.cls) curSpan.className = styles[seg.cls] || '';
-        curLine.appendChild(curSpan);
-      }
-      curSpan.textContent += seg.text.charAt(ci);
-      ci++;
-      if (ci >= seg.text.length) {
-        si++;
-        ci = 0;
-        if (si >= line.length) {
-          li++;
-          si = 0;
-          timeoutRef.current = setTimeout(step, 150);
-          return;
-        }
-      }
-      timeoutRef.current = setTimeout(step, seg.text.length > 20 ? 7 : 20);
+      renderLine(term, BOOT_LINES[li]);
+      li++;
+      timeoutRef.current = setTimeout(stepLine, 180);
     }
-    step();
+    stepLine();
   }
 
   function runBar() {
@@ -157,42 +133,19 @@ const Gateway = () => {
       return;
     }
 
-    // Type denied lines then reboot
-    let li = 0, si = 0, ci = 0;
-    let curLine = null, curSpan = null;
-
-    function step() {
+    // Line-at-a-time reveal
+    let li = 0;
+    function stepLine() {
       if (li >= DENIED_LINES.length) {
         appendCursor(term);
         timeoutRef.current = setTimeout(boot, 1100);
         return;
       }
-      const line = DENIED_LINES[li];
-      if (si === 0 && ci === 0) {
-        curLine = document.createElement('div');
-        term.appendChild(curLine);
-      }
-      const seg = line[si];
-      if (ci === 0) {
-        curSpan = document.createElement('span');
-        if (seg.cls) curSpan.className = styles[seg.cls] || '';
-        curLine.appendChild(curSpan);
-      }
-      curSpan.textContent += seg.text.charAt(ci);
-      ci++;
-      if (ci >= seg.text.length) {
-        si++;
-        ci = 0;
-        if (si >= line.length) {
-          li++;
-          si = 0;
-          timeoutRef.current = setTimeout(step, 150);
-          return;
-        }
-      }
-      timeoutRef.current = setTimeout(step, seg.text.length > 20 ? 7 : 20);
+      renderLine(term, DENIED_LINES[li]);
+      li++;
+      timeoutRef.current = setTimeout(stepLine, 180);
     }
-    step();
+    stepLine();
   }
 
   function renderLine(container, segments) {

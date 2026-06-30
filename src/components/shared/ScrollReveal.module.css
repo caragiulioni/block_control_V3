@@ -1,13 +1,11 @@
 .resolve {
   position: relative;
-  filter: blur(9px);
   opacity: 0;
   transform: translateY(16px);
-  transition: filter 0.75s ease, opacity 0.75s ease, transform 0.75s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .resolved {
-  filter: none;
   opacity: 1;
   transform: none;
 }
@@ -22,7 +20,8 @@
   pointer-events: none;
   background: linear-gradient(90deg, transparent, var(--cyan) 22%, #eafffb 50%, var(--cyan) 78%, transparent);
   box-shadow: 0 0 16px var(--cyan);
-  animation: wipe 2s ease-out forwards;
+  will-change: top, opacity;
+  animation: wipe 1.6s ease-out forwards;
 }
 
 @keyframes wipe {
@@ -33,7 +32,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .resolve {
-    filter: none;
     opacity: 1;
     transform: none;
     transition: none;

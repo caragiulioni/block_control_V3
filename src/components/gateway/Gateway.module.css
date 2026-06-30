@@ -14,7 +14,6 @@
     linear-gradient(rgba(61, 242, 208, 0.045) 1px, transparent 1px) 0 0 / 46px 46px,
     linear-gradient(90deg, rgba(61, 242, 208, 0.045) 1px, transparent 1px) 0 0 / 46px 46px,
     #05090af2;
-  backdrop-filter: blur(2px);
   overflow: hidden;
 }
 
@@ -35,7 +34,6 @@
 @keyframes dissolve {
   to {
     opacity: 0;
-    filter: blur(8px) brightness(1.5);
     transform: scale(1.015);
   }
 }

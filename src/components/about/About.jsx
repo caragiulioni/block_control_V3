@@ -23,7 +23,7 @@ const About = () => {
 
   return (
     <section className={styles.section} id="about">
-      <ScrollReveal onResolved={() => setVisible(true)}>
+      <ScrollReveal onResolved={() => setVisible(true)} scanline>
         <SectionHead eyebrow="FILE 00 // subject record" headingRef={headingRef}>
           ABOUT
         </SectionHead>

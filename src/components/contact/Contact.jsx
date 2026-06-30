@@ -57,7 +57,7 @@ const Contact = () => {
 
   return (
     <section className={styles.section} id="contact">
-      <ScrollReveal onResolved={() => setVisible(true)}>
+      <ScrollReveal onResolved={() => setVisible(true)} scanline>
         <SectionHead eyebrow="FILE 03 // open channel" headingRef={headingRef}>
           CONNECT
         </SectionHead>

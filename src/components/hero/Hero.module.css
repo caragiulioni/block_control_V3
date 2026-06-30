@@ -107,7 +107,7 @@
 .scrollCue {
   margin-top: clamp(28px, 6vh, 64px);
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.3em;
   color: var(--cyan);
   display: inline-flex;
@@ -129,7 +129,7 @@
   animation: bounce 1.6s ease-in-out infinite;
   color: var(--cyan);
   text-shadow: 0 0 10px var(--cyan);
-  font-size: 18px;
+  font-size: 22px;
 }
 
 @keyframes bounce {

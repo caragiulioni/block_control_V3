@@ -3,10 +3,11 @@ import styles from './ScrollReveal.module.css';
 
 /**
  * Wraps a section with scroll-to-decrypt behavior:
- * - Starts blurred/faded/shifted
- * - On scroll into view: resolves with a scanline wipe + optional text scramble
+ * - Starts faded/shifted
+ * - On scroll into view: resolves with optional scanline wipe + text scramble
+ * @param {boolean} scanline - Show the scanline wipe animation (default: false)
  */
-const ScrollReveal = ({ children, className = '', onResolved }) => {
+const ScrollReveal = ({ children, className = '', onResolved, scanline = false }) => {
   const ref = useRef(null);
   const [resolved, setResolved] = useState(false);
 
@@ -41,7 +42,7 @@ const ScrollReveal = ({ children, className = '', onResolved }) => {
       ref={ref}
       className={`${styles.resolve} ${resolved ? styles.resolved : ''} ${className}`}
     >
-      {resolved && <span className={styles.scanline} />}
+      {resolved && scanline && <span className={styles.scanline} />}
       {children}
     </div>
   );

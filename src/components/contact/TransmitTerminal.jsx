@@ -55,40 +55,18 @@ const TransmitTerminal = ({ transmitting, onComplete, success, bufferLength }) =
       return;
     }
 
-    let li = 0, si = 0, ci = 0;
-    let curLine = null, curSpan = null;
-
-    function step() {
+    // Line-at-a-time reveal (lighter than char-by-char)
+    let li = 0;
+    function stepLine() {
       if (li >= TX_LINES.length) {
         startBar();
         return;
       }
-      const line = TX_LINES[li];
-      if (si === 0 && ci === 0) {
-        curLine = document.createElement('div');
-        term.appendChild(curLine);
-      }
-      const seg = line[si];
-      if (ci === 0) {
-        curSpan = document.createElement('span');
-        if (seg.cls) curSpan.className = styles[seg.cls] || '';
-        curLine.appendChild(curSpan);
-      }
-      curSpan.textContent += seg.text.charAt(ci);
-      ci++;
-      if (ci >= seg.text.length) {
-        si++;
-        ci = 0;
-        if (si >= line.length) {
-          li++;
-          si = 0;
-          timeoutRef.current = setTimeout(step, 160);
-          return;
-        }
-      }
-      timeoutRef.current = setTimeout(step, seg.text.length > 20 ? 8 : 22);
+      renderLine(term, TX_LINES[li]);
+      li++;
+      timeoutRef.current = setTimeout(stepLine, 200);
     }
-    step();
+    stepLine();
 
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
