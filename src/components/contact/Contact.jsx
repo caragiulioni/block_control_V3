@@ -23,7 +23,8 @@ const Contact = () => {
   const formRef = useRef(null);
   const termColRef = useRef(null);
 
-  const isValid = name.trim() && email.trim() && message.trim();
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValid = name.trim() && isEmailValid && message.trim();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,7 +108,7 @@ const Contact = () => {
                     type="email"
                     autoComplete="email"
                     required
-                    className={`${styles.input} ${attempted && !email.trim() ? styles.inputError : ''}`}
+                    className={`${styles.input} ${attempted && !isEmailValid ? styles.inputError : ''}`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={transmitting || success}
@@ -129,7 +130,7 @@ const Contact = () => {
 
                 <div className={styles.formFooter}>
                   <Button
-                    variant="filled"
+                    variant={isValid ? 'filled' : 'outlined'}
                     color="neon"
                     onClick={handleSubmit}
                     disabled={transmitting || success}
