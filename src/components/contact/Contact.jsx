@@ -21,6 +21,7 @@ const Contact = () => {
   const [success, setSuccess] = useState(false);
   const [attempted, setAttempted] = useState(false);
   const formRef = useRef(null);
+  const termColRef = useRef(null);
 
   const isValid = name.trim() && email.trim() && message.trim();
 
@@ -30,6 +31,11 @@ const Contact = () => {
     if (!isValid || transmitting) return;
 
     setTransmitting(true);
+
+    // Scroll terminal into view so user sees the animation (especially on mobile)
+    setTimeout(() => {
+      termColRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
 
     // Submit to Netlify Forms in background
     const formData = new FormData(formRef.current);
@@ -142,7 +148,7 @@ const Contact = () => {
             </div>
 
             {/* Right: Terminal / Transmission */}
-            <div className={styles.termCol} aria-hidden="true">
+            <div className={styles.termCol} aria-hidden="true" ref={termColRef}>
               <div className={styles.termHeader}>
                 <FileId>03·B</FileId>
                 <span className={styles.termTitle}>TRANSMITTER</span>
