@@ -17,7 +17,7 @@ const Hero = () => {
       <div className={styles.grid} />
 
       <TopBar
-        left={<><b>BLOCKCONTROL</b> <span className={styles.topBarSub}><span style={{ color: 'var(--ink)' }}>NODE_MTL</span> <span style={{ color: 'var(--neon)' }}>//</span> <span style={{ color: 'var(--cyan)' }}>ONLINE</span></span></>}
+        left={<><b>BLOCKCONTROL</b> <span className={styles.topBarSub}><span style={{ color: 'var(--ink)' }}>NODE_MTL</span> <span style={{ color: 'var(--neon)' }} aria-hidden='true'>//</span> <span style={{ color: 'var(--cyan)' }}>ONLINE</span></span></>}
         right="TOD TC"
       />
 

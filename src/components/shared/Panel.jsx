@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import Chip from './Chip.jsx';
 import Brackets from './Brackets.jsx';
 import FileId from './FileId.jsx';
+import { formatSlashes } from '../../utils/formatSlashes.jsx';
 import styles from './Panel.module.css';
 
 const Panel = ({
@@ -47,7 +48,7 @@ const Panel = ({
           type="button"
         >
           <FileId>{id}</FileId>
-          <span className={styles.title}>{title}</span>
+          <span className={styles.title}>{formatSlashes(title)}</span>
           {statusLabel && (
             <span className={styles.status}>
               <Chip variant={statusVariant}>{statusLabel}</Chip>
@@ -60,7 +61,7 @@ const Panel = ({
       ) : (
         <div className={styles.header}>
           <FileId>{id}</FileId>
-          <span className={styles.title}>{title}</span>
+          <span className={styles.title}>{formatSlashes(title)}</span>
           {statusLabel && (
             <span className={styles.status}>
               <Chip variant={statusVariant}>{statusLabel}</Chip>

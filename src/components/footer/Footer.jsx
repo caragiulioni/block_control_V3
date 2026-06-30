@@ -89,7 +89,7 @@ const Footer = () => {
             </div>
             <div className={styles.row}>
               <span className={styles.tag}>BLOCKCONTROL</span>
-              <span><a className={styles.link} href="https://github.com/caragiulioni/block_control_V3" target="_blank" rel="noopener noreferrer">GITHUB ↗</a></span>
+              <span><a className={styles.link} href="https://github.com/caragiulioni/block_control_V3" target="_blank" rel="noopener noreferrer">GITHUB <span aria-hidden="true">↗</span></a></span>
             </div>
           </div>
         )}

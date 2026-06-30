@@ -33,7 +33,7 @@ const Links = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {link.name} ↗
+                  {link.name} <span aria-hidden="true">↗</span>
                 </a>
                 <p className={styles.desc}>{link.description}</p>
               </div>

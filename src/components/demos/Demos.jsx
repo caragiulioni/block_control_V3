@@ -133,7 +133,7 @@ const DemoCard = ({ demo, index }) => {
                 color={link.variant === 'neon' ? 'neon' : 'cyan'}
                 href={link.url}
               >
-                {link.label} ↗
+                {link.label} <span aria-hidden="true">↗</span>
               </Button>
             ))}
           </div>
