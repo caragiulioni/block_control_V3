@@ -21,7 +21,7 @@ export const LINKS = [
   },
     {
     name: 'GenericTM',
-    url: 'https://www.instagram.com/generictm',
+    url: 'https://open.spotify.com/artist/0POpNftZKkGyrS79WSFeKG',
     description: 'Music and design powerhouse.',
   },
   {

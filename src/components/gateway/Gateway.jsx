@@ -36,7 +36,7 @@ const DENIED_LINES = [
 const SESSION_KEY = 'blockcontrol_gateway_passed';
 
 // Boot phases: down → booting → ready → exiting | denied
-const PHASE_DELAY = 600; // ms between each "turn on" step
+const PHASE_DELAY = 500; // ms between each "turn on" step
 
 const Gateway = () => {
   const [dismissed, setDismissed] = useState(() => {
@@ -51,10 +51,9 @@ const Gateway = () => {
   const timeoutRef = useRef(null);
   const reducedMotion = useRef(false);
 
-  // Scramble heading: DOWN → READY (only triggers once at step 2)
-  const headingText = step >= 2 ? 'READY' : 'DOWN';
+  // Scramble heading: starts as DOWN, scrambles to READY when step >= 2
   const scrambleTrigger = step >= 2 ? 1 : 0;
-  const scrambleRef = useTextScramble(headingText, scrambleTrigger);
+  const scrambleRef = useTextScramble('READY', scrambleTrigger);
 
   useEffect(() => {
     reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -62,7 +61,7 @@ const Gateway = () => {
       // Render error lines immediately (static, no animation)
       renderStaticErrors();
       // Start boot sequence after a brief pause
-      timeoutRef.current = setTimeout(startBoot, 1200);
+      timeoutRef.current = setTimeout(startBoot, 300);
     }
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -228,27 +227,18 @@ const Gateway = () => {
 
       {isExiting && <span className={styles.sweep} />}
 
-      {/* TopBar — swaps from offline to online */}
+      {/* TopBar — always online */}
       <TopBar
         left={
-          isBooted ? (
-            <>
-              <b>BLOCKCONTROL</b>{' '}
-              <span className={styles.dot} aria-hidden="true">//</span>{' '}
-              <span style={{ color: 'var(--ink)' }}>NODE_MTL</span>{' '}
-              <span aria-hidden="true" style={{ color: 'var(--neon)' }}>//</span>{' '}
-              <span style={{ color: 'var(--cyan)' }}>ONLINE</span>
-            </>
-          ) : (
-            <>
-              <b>BLOCKCONTROL</b>{' '}
-              <span className={styles.dot} aria-hidden="true">//</span> NODE_MTL{' '}
-              <span className={styles.dot} aria-hidden="true">//</span>{' '}
-              <span style={{ color: 'var(--neon)' }}>OFFLINE</span>
-            </>
-          )
+          <>
+            <b>BLOCKCONTROL</b>{' '}
+            <span className={styles.dot} aria-hidden="true">//</span>{' '}
+            <span style={{ color: 'var(--ink)' }}>NODE_MTL</span>{' '}
+            <span aria-hidden="true" style={{ color: 'var(--neon)' }}>//</span>{' '}
+            <span style={{ color: 'var(--cyan)' }}>ONLINE</span>
+          </>
         }
-        right={isBooted ? 'TOD TC' : <>SYS 0xDEAD <span aria-hidden="true">·</span></>}
+        right="TOD TC"
       />
 
       <div className={styles.stage}>
@@ -262,12 +252,15 @@ const Gateway = () => {
 
               <h1 className={styles.heading}>
                 SYSTEM{' '}
-                <span
-                  className={step >= 2 ? styles.headingReady : styles.headingX}
-                  ref={scrambleRef}
-                >
-                  {headingText}
-                </span>
+                {step >= 2 ? (
+                  <span className={styles.headingReady} ref={scrambleRef}>
+                    READY
+                  </span>
+                ) : (
+                  <span className={styles.headingX}>
+                    DOWN
+                  </span>
+                )}
               </h1>
 
               <p className={styles.sub}>
@@ -282,14 +275,12 @@ const Gateway = () => {
                 {step >= 3 ? (
                   <>
                     <Chip variant="cyan">STATUS: ONLINE</Chip>
-                    <Chip variant="cyan">HANDSHAKE OK</Chip>
-                    <Chip variant="cyan">ENCRYPTED</Chip>
+                    <Chip variant="cyan">INIT HANDSHAKE</Chip>
                   </>
                 ) : (
                   <>
                     <Chip variant="neon">STATUS: OFFLINE</Chip>
                     <Chip variant="neon">AWAITING REBOOT</Chip>
-                    <Chip variant="neon">ENCRYPTED</Chip>
                   </>
                 )}
               </div>
@@ -334,40 +325,40 @@ const Gateway = () => {
           <aside className={styles.sidebar} aria-hidden="true">
             <div className={styles.sidebarBar}>
               <span>SYSTEM STATUS</span>
-              <span className={step >= 5 ? styles.indicatorOn : styles.indicatorOff}>
-                {step >= 5 ? 'ONLINE' : 'OFFLINE'}
+              <span className={isReady || isExiting ? styles.indicatorOn : styles.indicatorOff}>
+                {isReady || isExiting ? 'ONLINE' : 'OFFLINE'}
               </span>
             </div>
 
             <div className={styles.statusRows}>
               <div className={styles.statusRow}>
                 <span className={styles.rowKey}>CHANNEL</span>
-                <span className={styles.rowVal}>{step >= 5 ? 'SECURE' : 'NONE'}</span>
+                <span className={styles.rowVal}>{isReady || isExiting ? 'SECURE' : 'NONE'}</span>
               </div>
               <div className={styles.statusRow}>
                 <span className={styles.rowKey}>PROTOCOL</span>
-                <span className={styles.rowVal}>{step >= 5 ? 'RELAY / SMTP' : '—'}</span>
+                <span className={styles.rowVal}>{isReady || isExiting ? 'RELAY / SMTP' : '—'}</span>
               </div>
               <div className={styles.statusRow}>
                 <span className={styles.rowKey}>NODE</span>
-                <span className={styles.rowVal}>{step >= 5 ? 'MTL' : '0x00'}</span>
+                <span className={styles.rowVal}>{isReady || isExiting ? 'MTL' : '0x00'}</span>
               </div>
               <div className={styles.statusRow}>
                 <span className={styles.rowKey}>ENCRYPTION</span>
-                <span className={step >= 5 ? styles.rowValHot : styles.rowVal}>{step >= 5 ? 'ON' : 'OFF'}</span>
+                <span className={isReady || isExiting ? styles.rowValHot : styles.rowVal}>{isReady || isExiting ? 'ON' : 'OFF'}</span>
               </div>
               <div className={styles.statusRow}>
                 <span className={styles.rowKey}>LATENCY</span>
-                <span className={styles.rowVal}>{step >= 5 ? '12ms' : 'TIMEOUT'}</span>
+                <span className={styles.rowVal}>{isReady || isExiting ? '12ms' : 'TIMEOUT'}</span>
               </div>
               <div className={styles.statusRow}>
                 <span className={styles.rowKey}>TLS</span>
-                <span className={styles.rowVal}>{step >= 5 ? '1.3 / QUIC' : 'HANDSHAKE FAIL'}</span>
+                <span className={styles.rowVal}>{isReady || isExiting ? '1.3 / QUIC' : 'HANDSHAKE FAIL'}</span>
               </div>
             </div>
 
             <div className={styles.netBlock}>
-              {step >= 5 ? (
+              {isReady || isExiting ? (
                 <>
                   <span className={styles.netCode} style={{ color: 'var(--cyan)' }}>CONNECTION_ESTABLISHED</span>
                   <span className={styles.netMsg}>
@@ -399,8 +390,8 @@ const Gateway = () => {
             </div>
 
             <div className={styles.sidebarFoot}>
-              <span>{step >= 5 ? 'SIGNAL // STRONG' : 'SIGNAL // NONE'}</span>
-              <span>{step >= 5 ? '0xC9·G1' : '0x??·??'}</span>
+              <span>{isReady || isExiting ? 'SIGNAL // STRONG' : 'SIGNAL // NONE'}</span>
+              <span>{isReady || isExiting ? '0xC9·G1' : '0x??·??'}</span>
             </div>
           </aside>
         </div>
