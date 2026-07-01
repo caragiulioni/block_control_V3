@@ -15,8 +15,8 @@ const Photography = () => {
           collapsible
           defaultOpen={false}
         >
-          <p className="srOnly" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}>
-            A collection of personal photography — city streets, nightlife, live events, great food and candid moments, captured in Montréal and around the World. Some of my favorites come from recent trips to Taiwan and Korea.
+          <p className="sr-only">
+            A collection of personal photography — city streets, nightlife, live events, great food and candid moments, captured in Montréal and around the World. Some of Subject's favorites are derived from recent trips to Taiwan and Korea.
           </p>
           <PhotoViewer />
         </Panel>

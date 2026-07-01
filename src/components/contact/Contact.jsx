@@ -141,7 +141,7 @@ const Contact = () => {
                 </div>
 
                 {/* Screen reader announcement for form state */}
-                <div aria-live="polite" aria-atomic="true" className={styles.srOnly}>
+                <div aria-live="polite" aria-atomic="true" className="sr-only">
                   {success && 'Message sent successfully. You will receive a confirmation email shortly.'}
                   {transmitting && !success && 'Sending your message…'}
                 </div>

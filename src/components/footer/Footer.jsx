@@ -12,7 +12,7 @@ function scrambleText(text) {
 }
 
 const Footer = () => {
-  const [state, setState] = useState('encrypted'); // 'encrypted' | 'scrambling' | 'decrypted'
+  const [state, setState] = useState('encrypted'); // 'encrypted' | 'decrypted'
   const [dialogOpen, setDialogOpen] = useState(false);
   const triggerRef = useRef(null);
   const dialogRef = useRef(null);
@@ -27,8 +27,8 @@ const Footer = () => {
 
   const closeDialog = () => {
     setDialogOpen(false);
-    // Return focus to the decrypted area
-    if (triggerRef.current) triggerRef.current.focus();
+    // After dialog closes, descramble footer to decrypted state
+    setState('decrypted');
   };
 
   // Close dialog on Escape
@@ -42,20 +42,14 @@ const Footer = () => {
   }, [dialogOpen]);
 
   const handleDecrypt = () => {
-    setState('scrambling');
-    setTimeout(() => {
-      setState('decrypted');
-      setTimeout(() => setDialogOpen(true), 400);
-    }, 1300);
+    // Open dialog immediately
+    setDialogOpen(true);
   };
 
   const successMsg = 'blockcontrol.isViewed() — STATUS: 200 - Thanks for stopping by!'
 
-  // Only attach scramble when transitioning
-  const scrambleRef = useTextScramble(
-    successMsg,
-    state === 'scrambling'
-  );
+  // Scramble triggers when state changes to decrypted (after dialog closes)
+  const scrambleRef = useTextScramble(successMsg, state === 'decrypted');
 
 
 
@@ -63,28 +57,22 @@ const Footer = () => {
     <>
       <footer className={styles.footer}>
         {state !== 'decrypted' ? (
-          /* Encrypted / scrambling state */
+          /* Encrypted state */
           <div className={styles.encrypted}>
-            {state === 'encrypted' ? (
-              <TerminalPrompt highlight="FAIL" onClick={handleDecrypt} ariaLabel="Decrypt footer — reveal site information">
-                on footer.decrypt() — click to resolve
-              </TerminalPrompt>
-            ) : (
-              <TerminalPrompt variant="success" textRef={scrambleRef}>
-                {'\u00A0'}
-              </TerminalPrompt>
-            )}
+            <TerminalPrompt highlight="FAIL" onClick={handleDecrypt} ariaLabel="Decrypt footer — reveal site information">
+              on footer.decrypt() — click to resolve
+            </TerminalPrompt>
             <div className={styles.scrambledRow} aria-hidden="true">
               <span className={styles.scrambled}>{scrambleText('BLOCKCONTROL')}</span>
               <span className={styles.scrambled}>{scrambleText('GITHUB')}</span>
             </div>
           </div>
         ) : (
-          /* Decrypted state */
+          /* Decrypted state — shows after dialog closes */
           <div className={styles.decryptedWrap}>
             <div className={styles.successRow}>
-              <TerminalPrompt variant="success" highlight="OK">
-                {successMsg}
+              <TerminalPrompt variant="success" highlight="OK" textRef={scrambleRef}>
+                {'\u00A0'}
               </TerminalPrompt>
             </div>
             <div className={styles.row}>
@@ -97,8 +85,8 @@ const Footer = () => {
 
       <div className={styles.notes}>
         <Note prefix variant="muted" text="WCAG 2.2 AA compliant: Uses semantic HTML, logical heading hierarchies, keyboard focus indicators, and full screen-reader optimizations." />
-		<Note prefix variant="muted" text="This site has interactive easter eggs and hidden features. My goal was to make those moments enjoyable for everyone, regardless of how you browse. If you have feedback on the screen reader experience, I'd love to hear it through the contact form." />
         <Note prefix variant="muted" text="Motion Accessible: Respects user reduced-motion preferences and keeps active animations safely under the 3Hz flashing threshold." />
+		<Note prefix variant="muted" text="This site has small interactive easter eggs. My goal was to make those moments enjoyable for everyone, regardless of how you browse. If you have feedback on the accessbility, I'd love to hear it through the contact form." />
       </div>
 
       {/* Easter egg dialog */}

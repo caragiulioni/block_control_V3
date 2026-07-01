@@ -45,6 +45,7 @@ const Hero = () => {
         <span aria-hidden='true' className={styles.scrollCue}>
           SCROLL TO DECRYPT <span className={styles.blink}>▾</span>
         </span>
+        <p className="sr-only">Block Control now decrypting content. Continue navigating to explore.</p>
       </div>
     </header>
   );

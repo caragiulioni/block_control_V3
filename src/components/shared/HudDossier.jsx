@@ -16,7 +16,7 @@ const HudDossier = ({
   children,
 }) => {
   return (
-    <aside className={styles.hud} aria-hidden="true">
+    <aside className={styles.hud}>
       <div className={styles.scan} aria-hidden="true" />
       <div className={styles.bar}>
         {fileId && <FileId>{fileId}</FileId>}
@@ -28,7 +28,7 @@ const HudDossier = ({
       </div>
 
       <div className={styles.redact}>
-        <div className={styles.glyph}>{glyph}</div>
+        <div className={styles.glyph} aria-hidden="true">{glyph}</div>
         <div className={styles.rmeta}>
           <div>
             <span className={styles.metaLabel}>VISUAL ID <span aria-hidden="true">//</span></span>{' '}
@@ -88,7 +88,7 @@ const HudDossier = ({
       )}
 
       {chips.length > 0 && (
-        <div className={styles.chips}>
+        <div className={styles.chips} aria-hidden="true">
           {chips.map((label, i) => (
             <Chip key={i} variant="neon">
               {label}
