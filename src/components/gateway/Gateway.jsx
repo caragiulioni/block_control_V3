@@ -9,21 +9,21 @@ import { useTextScramble } from '../../hooks/useTextScramble.js';
 import styles from './Gateway.module.css';
 
 const BOOT_LINES = [
-  [{ text: '> NODE MTL // carrier ......... ' }, { text: 'LINKED', cls: 'ok' }],
-  [{ text: '> core.services ............... ' }, { text: 'ONLINE', cls: 'ok' }],
-  [{ text: '> auto-reboot ................. ' }, { text: 'OK', cls: 'ok' }],
-  [{ text: '> backup node ................. ' }, { text: 'ROUTED', cls: 'ok' }],
-  [{ text: '> integrity check ............. ' }, { text: 'PASS', cls: 'ok' }],
-  [{ text: '> decryption key .............. ' }, { text: 'ACCEPTED', cls: 'ok' }],
+  [{ text: '> NODE MTL // carrier ... ' }, { text: 'LINKED', cls: 'ok' }],
+  [{ text: '> core.services ......... ' }, { text: 'ONLINE', cls: 'ok' }],
+  [{ text: '> auto-reboot ........... ' }, { text: 'OK', cls: 'ok' }],
+  [{ text: '> backup node ........... ' }, { text: 'ROUTED', cls: 'ok' }],
+  [{ text: '> integrity check ....... ' }, { text: 'PASS', cls: 'ok' }],
+  [{ text: '> decryption key ........ ' }, { text: 'ACCEPTED', cls: 'ok' }],
 ];
 
 const ERROR_LINES = [
-  [{ text: '> NODE MTL // carrier ......... ' }, { text: 'LOST', cls: 'bad' }],
-  [{ text: '> core.services ............... ' }, { text: 'OFFLINE', cls: 'bad' }],
-  [{ text: '> attempting auto-reboot ...... ' }, { text: 'FAIL', cls: 'bad' }],
-  [{ text: '> rerouting via backup node ... ' }, { text: 'TIMEOUT', cls: 'bad' }],
-  [{ text: '> integrity check ............. ' }, { text: 'PASS', cls: 'ok' }],
-  [{ text: '> decryption key .............. ' }, { text: 'REQUIRED', cls: 'bad' }],
+  [{ text: '> NODE MTL // carrier ... ' }, { text: 'LOST', cls: 'bad' }],
+  [{ text: '> core.services ......... ' }, { text: 'OFFLINE', cls: 'bad' }],
+  [{ text: '> auto-reboot ........... ' }, { text: 'FAIL', cls: 'bad' }],
+  [{ text: '> backup node ........... ' }, { text: 'TIMEOUT', cls: 'bad' }],
+  [{ text: '> integrity check ....... ' }, { text: 'PASS', cls: 'ok' }],
+  [{ text: '> decryption key ........ ' }, { text: 'REQUIRED', cls: 'bad' }],
   [{ text: '> standby for operator', cls: 'dim' }],
 ];
 
@@ -266,7 +266,7 @@ const Gateway = () => {
               <p className={styles.sub}>
                 {step >= 3
                   ? <>BlockControl is online. <b style={{ color: 'var(--cyan)' }}>Access granted on confirmation.</b></>
-                  : <>BlockControl is offline and awaiting reboot. <b>Decryption required on reconnect.</b></>
+                  : <>BlockControl is offline. <b>Decryption required on reconnect.</b></>
                 }
               </p>
 
@@ -288,14 +288,12 @@ const Gateway = () => {
               {/* Terminal */}
               <div className={styles.term} ref={termRef} />
 
-              {/* Progress bar */}
-              {step >= 4 && (
-                <ProgressBar
-                  pct={pct}
-                  msg={barMsg || 'INITIALIZING…'}
-                  variant={isReady || isExiting ? 'success' : isDenied ? 'tx' : 'tx'}
-                />
-              )}
+              {/* Progress bar — always visible, starts at 0 */}
+              <ProgressBar
+                pct={pct}
+                msg={barMsg || 'INITIALIZING…'}
+                variant={isReady || isExiting ? 'success' : isDenied ? 'tx' : 'tx'}
+              />
 
               {/* Action buttons — Y/N */}
               <div className={`${styles.actions} ${isReady ? styles.actionsReady : ''}`}>

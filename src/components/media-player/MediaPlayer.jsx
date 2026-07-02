@@ -383,15 +383,32 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
                   <div className={styles.trkName}>{track.name}</div>
                   <div className={styles.trkDesc}>{track.description}</div>
                 </div>
-                <a
+                <button
                   className={styles.trkDownload}
-                  href={track.src}
-                  download={`Block Control - ${track.name}`}
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    fetch(track.src)
+                      .then((res) => res.blob())
+                      .then((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `Block Control - ${track.name}.mp3`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                      })
+                      .catch(() => {
+                        // Fallback: open in new tab
+                        window.open(track.src, '_blank');
+                      });
+                  }}
                   aria-label={`Download ${track.name}`}
+                  type="button"
                 >
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 5v14m0 0l-4-4m4 4l4-4"/><path d="M5 19h14"/></svg>
-                </a>
+                </button>
                 <button
                   className={`${styles.trkFav} ${favorites.includes(track.id) ? styles.trkFavOn : ''}`}
                   onClick={(e) => { e.stopPropagation(); toggleFavorite(track.id); }}
