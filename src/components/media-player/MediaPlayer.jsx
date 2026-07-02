@@ -387,6 +387,12 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
                   className={styles.trkDownload}
                   onClick={(e) => {
                     e.stopPropagation();
+                    // iOS doesn't support programmatic downloads — open in new tab instead
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+                    if (isIOS) {
+                      window.open(track.src, '_blank');
+                      return;
+                    }
                     fetch(track.src)
                       .then((res) => res.blob())
                       .then((blob) => {
