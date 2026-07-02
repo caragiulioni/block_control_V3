@@ -396,11 +396,13 @@ const MediaPlayer = ({ pauseRef, onPlay }) => {
                         a.download = `Block Control - ${track.name}.mp3`;
                         document.body.appendChild(a);
                         a.click();
-                        document.body.removeChild(a);
-                        URL.revokeObjectURL(url);
+                        // Delay cleanup for Firefox
+                        setTimeout(() => {
+                          document.body.removeChild(a);
+                          URL.revokeObjectURL(url);
+                        }, 1500);
                       })
                       .catch(() => {
-                        // Fallback: open in new tab
                         window.open(track.src, '_blank');
                       });
                   }}
