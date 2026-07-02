@@ -179,8 +179,12 @@
 .spark {
   display: block;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  align-self: stretch;
   height: 44px;
   margin: 2px 0 6px;
+  overflow: visible;
 }
 
 .chips {
