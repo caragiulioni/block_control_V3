@@ -34,9 +34,10 @@ const Contact = () => {
     setTransmitting(true);
 
     // Scroll terminal into view so user sees the animation (especially on mobile)
+    // Longer delay for iOS keyboard dismiss
     setTimeout(() => {
-      termColRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
+      termColRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 400);
 
     // Submit to Netlify Forms in background
     const formData = new FormData(formRef.current);

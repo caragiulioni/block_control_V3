@@ -130,8 +130,8 @@ const TransmitTerminal = ({ transmitting, onComplete, success, bufferLength }) =
         {phase === 'idle' && !success && (
           <span className={styles.cursor} />
         )}
-        {/* Imperative DOM target — only used when typing/done, hidden from React children */}
-        <div ref={termRef} style={{ display: phase === 'idle' && !success ? 'none' : 'block' }} />
+        {/* Imperative DOM target for typewriter */}
+        <div ref={termRef} />
       </div>
 
       {/* Progress bar */}
