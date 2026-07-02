@@ -52,39 +52,41 @@ const HudDossier = ({
       </div>
 
       {spark && (
-        <svg
-          className={styles.spark}
-          viewBox="0 0 240 44"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <text x="0" y="9" fill="#4f6b67" fontSize="8" fontFamily="Space Mono">
+        <>
+          <span className={styles.sparkLabel} aria-hidden="true">
             {spark === 'flat' ? 'TRAJECTORY // NO SIGNAL' : 'TRAJECTORY // THEN → NOW'}
-          </text>
-          {spark === 'flat' ? (
-            <>
-              <line x1="4" y1="38" x2="236" y2="38" stroke="#1f8d7c" strokeWidth="1.5" strokeDasharray="4 3" />
-              <circle cx="236" cy="38" r="3" fill="#4f6b67" />
-            </>
-          ) : (
-            <>
-              <polyline
-                points="4,38 38,36 70,30 104,31 140,22 176,18 210,9 236,5"
-                fill="none"
-                stroke="#1f8d7c"
-                strokeWidth="1.5"
-              />
-              <polyline
-                points="4,38 38,36 70,30 104,31 140,22 176,18 210,9 236,5"
-                fill="none"
-                stroke="#3df2d0"
-                strokeWidth="1"
-                opacity="0.6"
-              />
-              <circle cx="236" cy="5" r="3" fill="#ff4f7a" />
-            </>
-          )}
-        </svg>
+          </span>
+          <svg
+            className={styles.spark}
+            viewBox="0 0 240 34"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            {spark === 'flat' ? (
+              <>
+                <line x1="4" y1="28" x2="236" y2="28" stroke="#1f8d7c" strokeWidth="1.5" strokeDasharray="4 3" />
+                <circle cx="236" cy="28" r="3" fill="#4f6b67" />
+              </>
+            ) : (
+              <>
+                <polyline
+                  points="4,28 38,26 70,20 104,21 140,12 176,8 210,3 236,1"
+                  fill="none"
+                  stroke="#1f8d7c"
+                  strokeWidth="1.5"
+                />
+                <polyline
+                  points="4,28 38,26 70,20 104,21 140,12 176,8 210,3 236,1"
+                  fill="none"
+                  stroke="#3df2d0"
+                  strokeWidth="1"
+                  opacity="0.6"
+                />
+                <circle cx="236" cy="1" r="3" fill="#ff4f7a" />
+              </>
+            )}
+          </svg>
+        </>
       )}
 
       {chips.length > 0 && (

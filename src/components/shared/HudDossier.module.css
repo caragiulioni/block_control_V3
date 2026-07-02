@@ -176,14 +176,23 @@
   color: var(--neon);
 }
 
+.sparkLabel {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  display: block;
+  margin-top: 6px;
+}
+
 .spark {
   display: block;
   width: 100%;
   max-width: 100%;
   min-width: 0;
   align-self: stretch;
-  height: 44px;
-  margin: 2px 0 6px;
+  height: 34px;
+  margin: 4px 0 6px;
   overflow: visible;
 }
 
