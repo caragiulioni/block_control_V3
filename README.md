@@ -42,7 +42,7 @@ The site auto-deploys via Netlify webhook on push to `main`.
 - Gmail alias configured for sending/receiving as the domain address
 - Resend handles transactional auto-reply emails via API
 - DNS records include SPF, DKIM, and DMARC (`p=none`) entries for Resend domain verification and deliverability
-- Netlify Function (`submission-created`) triggers on every form submission and sends the submitter a styled auto-reply. Sent as both HTML and plain text, from `signal@blockcontrol.ca` with a `reply_to` so replies reach a real inbox — all deliverability tweaks to keep it out of spam. Try it, it's fun!
+- Netlify Function (`submission-created`) triggers on every form submission and sends the submitter a styled auto-reply. Sent as both HTML and plain text, from the domain sender (via the `FROM_EMAIL` env var) with a `reply_to` so replies reach a real inbox — all deliverability tweaks to keep it out of spam. Try it, it's fun!
 
 ## Accessibility
 

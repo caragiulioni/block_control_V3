@@ -5,7 +5,7 @@
  */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_EMAIL = process.env.FROM_EMAIL || 'signal@blockcontrol.ca';
+const FROM_EMAIL = process.env.FROM_EMAIL;
 const FROM_NAME = 'Operator';
 const REPLY_TO_EMAIL = process.env.REPLY_TO_EMAIL || FROM_EMAIL;
 
@@ -17,6 +17,12 @@ export async function handler(event) {
   // Only send auto-reply if we have an email address
   if (!email) {
     return { statusCode: 200, body: 'No email provided, skipping auto-reply.' };
+  }
+
+  // FROM_EMAIL must be configured in the environment (set per deploy context in Netlify)
+  if (!FROM_EMAIL) {
+    console.error('FROM_EMAIL is not set; cannot send auto-reply.');
+    return { statusCode: 500, body: 'Sender address not configured.' };
   }
 
   const html = buildEmailHtml(name);
