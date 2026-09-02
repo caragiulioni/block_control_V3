@@ -28,7 +28,7 @@ Personal portfolio site. This is the third iteration of Block Control, rebuilt f
 - **Forms:** Netlify Forms with honeypot spam protection
 - **Email:** Resend API (Netlify Functions, `submission-created` event)
 - **Assets:** Google Cloud Storage (images, audio)
-- **Domain/DNS:** IONOS (blockcontrol.ca), with SPF + DKIM configured for Resend
+- **Domain/DNS:** IONOS (blockcontrol.ca), with SPF + DKIM + DMARC configured for Resend
 
 ## Deployment
 
@@ -41,8 +41,8 @@ The site auto-deploys via Netlify webhook on push to `main`.
 - Custom domain email managed through IONOS
 - Gmail alias configured for sending/receiving as the domain address
 - Resend handles transactional auto-reply emails via API
-- DNS records include SPF and DKIM entries for Resend domain verification
-- Netlify Function (`submission-created`) triggers on every form submission and sends a styled HTML auto-reply to the submitter
+- DNS records include SPF, DKIM, and DMARC (`p=none`) entries for Resend domain verification and deliverability
+- Netlify Function (`submission-created`) triggers on every form submission and sends the submitter a styled auto-reply. Sent as both HTML and plain text, from `signal@blockcontrol.ca` with a `reply_to` so replies reach a real inbox — all deliverability tweaks to keep it out of spam. Try it, it's fun!
 
 ## Accessibility
 
@@ -54,7 +54,7 @@ The internet is for everyone. This site is built with that in mind:
 - Focus-visible styling throughout for keyboard users
 - Semantic HTML, proper heading hierarchy, and landmark regions
 
-This site leans heavily into interactive flair — decrypt buttons, terminal animations, and visual effects. I wanted to challenge myself to make those moments work for everyone, not just visually. If you or someone you know navigates with a screen reader and has thoughts on how the experience could be better, I'd genuinely love to hear it. Reach out through the contact form.
+This site leans heavily into interactive flair — decrypt buttons, terminal animations, and visual effects. I wanted to challenge myself to make what I could of those moments enjoyable for everyone. If you or someone you know navigates with a screen reader and has thoughts on how the experience could be better, I'd genuinely love to hear it. Reach out through the contact form.
 
 ## Local Development
 
@@ -62,7 +62,5 @@ This site leans heavily into interactive flair — decrypt buttons, terminal ani
 npm install
 npm run dev
 ```
-
-For Netlify Functions locally: `netlify dev` (requires Netlify CLI and a linked site).
 
 ---

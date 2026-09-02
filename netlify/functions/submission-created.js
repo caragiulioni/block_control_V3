@@ -5,8 +5,9 @@
  */
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@blockcontrol.ca';
+const FROM_EMAIL = process.env.FROM_EMAIL || 'signal@blockcontrol.ca';
 const FROM_NAME = 'Operator';
+const REPLY_TO_EMAIL = process.env.REPLY_TO_EMAIL || FROM_EMAIL;
 
 export async function handler(event) {
   // Parse the submission payload
@@ -19,6 +20,7 @@ export async function handler(event) {
   }
 
   const html = buildEmailHtml(name);
+  const text = buildEmailText(name);
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
@@ -30,8 +32,10 @@ export async function handler(event) {
       body: JSON.stringify({
         from: `${FROM_NAME} <${FROM_EMAIL}>`,
         to: [email],
+        reply_to: REPLY_TO_EMAIL,
         subject: 'SIGNAL RECEIVED // BLOCKCONTROL',
         html,
+        text,
       }),
     });
 
@@ -113,7 +117,7 @@ function buildEmailHtml(name) {
                 <tr>
                   <td>
                     <p style="margin:8px 0 0;font-size:13px;color:#ff4f7a;line-height:1.8;">
-                      AUTO-REPLY <span aria-hidden="true">//</span> DO NOT RESPOND
+                      AUTO-REPLY <span aria-hidden="true">//</span> REPLY ANYTIME TO REACH THE OPERATOR
                     </p>
                   </td>
                 </tr>
@@ -127,4 +131,21 @@ function buildEmailHtml(name) {
   </table>
 </body>
 </html>`;
+}
+
+function buildEmailText(name) {
+  const greeting = name ? name.toUpperCase() : 'OPERATOR';
+
+  return `BLOCKCONTROL // AUTO-REPLY
+
+> TRANSMISSION RECEIVED
+> RECIPIENT: ${greeting}
+> SIGNAL STRENGTH: STRONG
+> STATUS: QUEUED FOR REVIEW - STANDBY FOR OPERATOR RESPONSE
+
+Thanks for your form submission, I'll get back to you shortly.
+
+You can reply anytime to reach the operator.
+
+www.blockcontrol.ca`;
 }
