@@ -12,7 +12,7 @@ const DEMOS = [
   {
     id: 'DEMO_01',
     title: 'Block Control V2',
-    description: 'How far we\'ve come from here...Poowered by GraphQL using Contentful, webhook via Netlify.',
+    description: 'How far we\'ve come from here...Powered by GraphQL using Contentful, webhook via Netlify.',
     tech: ['REACT', 'DESIGN', 'CONTENTFUL', 'UI/UX'],
     image: 'https://storage.googleapis.com/blockcontrol-2026/demo%20imgs/block-control%20-legacy.png',
     links: [
